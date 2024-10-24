@@ -1,0 +1,45 @@
+    Team number: 
+3
+
+Team name: 
+the gym bros
+
+Team members: 
+Joe, Breanna, Idaly, Nicole Joanne,and John 
+
+Application name: 
+Gym Bro’s
+
+Application description: 
+We want to create a product centered around people and their fitness life. We also want to have our application be social and allow people to connect on their goals and vibes. Our application will include a variety of different features such as default fitness tracking, competitive fitness goals with your assigned contacts. We also have a full in-app store for quick access to a fitness marketplace allowing for the purchase of fitness-based items and merch. 
+	Users who download our app will be able to change their boring, unmotivated fitness life into a competitive digital battlefield. Our app will engage those who are unmotivated and turn them into healthy, energetic individuals obsessed with fitness points to get sweet discounts on our capitalist-friendly fitness marketplace. 
+	Our point system will be the greatest point system the current point market has to offer, as we will award a certain amount of points for different activities that will be calculated by our state of the art calculator. We will have a built-in calorie burn counter to ensure that you are fully aware of your daily fitness goals. 
+
+Vision statement: 
+For everyone, who is focused on their health. The Gym Bros is a fitness tracker that provides people with knowledge about their health.
+
+Development Methodology: 
+We plan to meet at least once a week every Tuesday and adjust if we need more time. By meeting at least once a week it’ll help us be accountable for what we need to get done and hold each other accountable. 
+Default input-based fitness tracker, timer (calories calculated with time, inputted user details, method of work out, etc)
+Marketplace with a shopping cart, checkout button, edit stock numbers when item sells (no refund/return policy)
+Point system that awards points based on calculated fitness (collaborative point system)
+Generated deal codes that give you discounts (Randomly generated for each user, void when used once)
+Account creation with inputs for user weight, height, age, etc.
+Account editing so users can update their stats
+Social media page to like and comment under other users’ posts
+
+Communication Plan:
+Our team will communicate with each other in Discord on a server. 
+
+Meeting plan:
+Team Meeting: Every Tuesday 3:30 PM + other days when needed
+TA Meeting: TBD (hopefully engineering center Thursdays at 12 PM)
+
+Use case diagram:
+
+https://lucid.app/lucidchart/1783f7d9-963f-4d41-a935-901697a30803/edit?viewport_loc=-299%2C60%2C2690%2C1384%2C.Q4MUjXso07N&invitationId=inv_08e5bff6-b129-41d9-9798-c5f68d427736
+
+Wireframes: https://www.figma.com/design/V1KV8GYHb6ChNeyFKSt1lR/Wireframe?node-id=0-1&t=yRuCBTujWk3ZiAwg-1
+
+
+
