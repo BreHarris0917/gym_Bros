@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{> header}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="/ProjectRepository/ProjectSourceCode/resources/css/style.css">
+</head>
+
+<body>
+
+    <h1>Home Page</h1>
+
+    <table class="table">
+
+        <tbody>
+            <tr>
+                <td><strong>First name:</strong></td>
+                <td><strong>{{first_name}}</strong></td> {{! replace }}
+            </tr>
+            <tr>
+                <td><strong>Last name:</strong></td>
+                <td><strong>{{last_name}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Email:</strong></td>
+                <td><strong>{{email}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Username:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Password:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Birthday:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Height:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Weight:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+            <tr>
+                <td><strong>Last fitness information:</strong></td>
+                <td><strong>{{}}</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+{{> footer}}
+
+</body>
+</html>
