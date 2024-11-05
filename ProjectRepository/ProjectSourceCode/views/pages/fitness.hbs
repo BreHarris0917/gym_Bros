@@ -1,26 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{> head }}
+    {{> head }} <!--Header template from head.hbs-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>The Fitness Page</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!--Using bootstrap for styling-->
 </head>
+<style>
+    .modal-content { max-width: 400px; margin: auto; }
+</style> <!--Centering the modal for the workout popup-->
 <body>
     <div class="container mt-5">
         <h2 class="text-center">Welcome, {{first_name}}!</h2>
     </div>
-    <div class="row mt-4">
-        <div class="col-md-4 mb-4">
-            <div class="card">
-                <div class="card-body">
-                <h5 class="card-title">Workout</h5>
-                <p class="card-text">Description</p>
+    <div class="container mt-4">
+        <div class="row">
+            <!--Workout cards, feel free to add more workouts if needed-->
+            <!--TODO: change workout names and descriptions to whatever workouts-->
+            <div class="col-md-4 mb-4" id="workout-1">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 1</h5> <!--Workout title-->
+                        <p class="card-text">Description for Workout 1</p> <!--Workout desc.-->
+                        <button class="btn btn-primary start-workout-btn" data-workout="1">Start Workout</button> <!--Opens timer popup-->
+                        <!--data-workout for dynamic ID based modal manipulation-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-2">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 2</h5>
+                        <p class="card-text">Description for Workout 2</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="2">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-3">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 3</h5>
+                        <p class="card-text">Description for Workout 3</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="3">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 4</h5>
+                        <p class="card-text">Description for Workout 4</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="4">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 5</h5>
+                        <p class="card-text">Description for Workout 5</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="5">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 6</h5>
+                        <p class="card-text">Description for Workout 6</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="6">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-7">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 7</h5>
+                        <p class="card-text">Description for Workout 7</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="7">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 8</h5>
+                        <p class="card-text">Description for Workout 8</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="8">Start Workout</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" id="workout-9">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Workout 9</h5>
+                        <p class="card-text">Description for Workout 9</p>
+                        <button class="btn btn-primary start-workout-btn" data-workout="9">Start Workout</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
     {{> footer }}
-    </body>
+    <!--Workout timer popup, dynamically starts according to the ID of the workout-->
+    <!--Modal specifications:
+            Workout title must be shown, linked dynamically to the data-workout ID.
+            Workout description with similar fashion
+            Timer display: Hour, Minute, Second, Millisecond
+            Timer function to update timer
+            Button to start workout (starts the timer)
+            Button to pause workout (pauses the timer, does not reset)
+            Button to end workout (resets the timer to 0, displays the amount of calories burnt using multiplier factor)
+            Gives points to player (100 calories burnt = 1 point) (?)
+    -->
+    <div class="modal fade" id="workoutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workoutTitle"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--Ends workout and hopefully(?) resets the timer-->
+                    <!--TODO: onclick for function ending workout-->
+                </div> <!--Modal header is set dynamically using the id-->
+                <div class="modal-body">
+                    <p id="workoutDescription"></p> <!--Just like the header above, dynamically sets the desc according to id-->
+                    <div class="timer-display">
+                        <h5>Time: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span></h5>
+                    </div> <!--Timer that functions with multiple time variables that go to milliseconds, but do we even need milliseconds?-->
+                    <button class="btn btn-primary mt-3" id="timerBtn">Timer Start</button> <!--Starts the function and toggles timer on/off-->
+                    <!--TODO: onclick for function starting timer-->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger">End Workout</button> <!--End workout function, resets timer, red button!-->
+                    <!--TODO: onclick for function ending workout-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //TODO: Variables
+        //workout number variable
+        //timer variable
+        //interval variable for timer updating
+        //multipliers (array?)
+        //boolean for timer toggle
+
+        //TODO: Modal open, dynamic update
+        //document.querySelectorAll('.start-workout-btn').forEach(button => {button.addEventListener('click', () => {});  });
+        //open the workout modal with the start workout button
+        //event listener so that when user clicks, parseInt the attribute of data-workout ID, sets this to workout number variable from above
+        //get the title
+        //get the dexcription
+        //reset the timer
+        //new bootstrap.Modal(document.getElementById('workoutModal')); pop out
+        //.show
+
+        //TODO: Timer toggle function
+        //if timer is not running, toggle boolean and then change the text of timer (Stop Timer)
+        //start updating intervals with ms
+        //else, toggle boolean and then change the text of timer (Resume Timer)
+        //stop updating timer
+
+        //TODO: Timer interval update
+        //1000ms = 1s
+        //60s = 1m
+        //60m = 1h
+        //24h = 1d
+        //update text (text != variable, we need to update both)
+
+        //TODO: End the workout
+        //clear timer, reset text, toggle boolean
+        //run a calorie calculator (use seconds)
+        //calories burned = seconds * multiplier[array pos]
+        //display calories burned
+        //reset timer
+        //close modal
+
+        //TODO: Timer reset
+        //reset varaibles
+        //reset text
+
+    </script>
+    <!--Javascript-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
+</body>
 </html>
