@@ -9,17 +9,55 @@
     <link rel="stylesheet" href="/ProjectRepository/ProjectSourceCode/resources/css/style.css">
 </head>
 
-<header>
-    <h1>Shop Our Products</h1>
-    <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
-</header>
-
-<!-- display all the shopable items...-->
-<!-- what things are in shop... atheltic wear. protein powder? 
-Table style? -->
-
-
 <body>
+    <header>
+        <h1>Shop Our Products</h1>
+        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
+    </header>
+
+    <!-- display all the shopable items...-->
+    <!-- what things are in shop... atheltic wear. protein powder? 
+Table style? -->
+    <header>
+        <h1>Shop Our Products</h1>
+        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
+    </header>
+
+    <section id="shop-items">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Description</th>
+                    <th>Price</th>
+                    <th>Add to Cart</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- idea for clothing -->
+                <tr>
+                    <td><!-- find pgoto to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/athletic-wear.jpg" -->
+                            alt="Athletic Wear" class="product-image"></td>
+                    <td>Athletic Wear</td>
+                    <td>Comfortable, high-performance sportswear for all activities.</td>
+                    <td>$40.00</td>
+                    <td><button class="btn btn-add-to-cart" data-id="athletic-wear">Add to Cart</button></td>
+                </tr>
+                <!-- Idea for protein powder -->
+                <tr>
+                    <td><!-- find photo to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/protein-powder.jpg" -->
+                            alt="Protein Powder" class="product-image"></td>
+                    <td>Protein Powder</td>
+                    <td>High-quality protein powder for muscle growth and recovery.</td>
+                    <td>$25.00</td>
+                    <td><button class="btn btn-add-to-cart" data-id="protein-powder">Add to Cart</button></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </section>
+
 
     {{> footer}}
 
