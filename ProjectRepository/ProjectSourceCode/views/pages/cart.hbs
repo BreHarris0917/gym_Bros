@@ -10,8 +10,41 @@
 </head>
 
 <body>
-
-<!-- 
+    <section id="cart-items">
+        <h2>Your Cart</h2>
+        {{#if cartItems.length}} <!-- this just checks something is in the cart-->
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Image</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each cartItems}} <!-- loops through each item-->
+                <tr>
+                   <!-- use this to insert images of each prodcut <td><img src="{{this.imageUrl}}" alt="{{this.name}}" class="product-image"></td> -->
+                    <td>{{this.name}}</td>
+                    <td>${{this.price}}</td>
+                    <td>
+                        <input type="number" min="1" value="{{this.quantity}}" data-id="{{this.id}}"
+                            class="quantity-input">
+                    </td>
+                    <td>
+                        <button class="btn-remove" data-id="{{this.id}}">Remove</button>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+        {{else}}
+        <p>Your cart is currently empty.</p>
+        {{/if}}
+    </section>
+    <!-- 
 cart items
 List of items in the cart, each with:
 Product image
@@ -21,8 +54,13 @@ Quantity input (to update item quantity)
 Remove button (to delete item from cart)
 Message if the cart is empty (e.g., "Your cart is currently empty")
  -->
-
-<!-- 
+    <section id> = "order summary</section>
+    <h2>Order Summary</h2>
+    <p>Total items: {{totalItems}}</p>
+    <p>Subtotal: ${{subtotal}}</p>
+    <p>Tax: ${{tax}}</p>
+    <h3>Total: ${{total}}</h3>
+    <!-- 
 order summary
 Total items in the cart
 Subtotal (sum of items)
@@ -30,7 +68,7 @@ Tax (optional, depending on implementation)
 Total cost (subtotal + tax)
  -->
 
-<!-- 
+    <!-- 
 payment 
 Form for payment details:
 Name on card
@@ -39,38 +77,42 @@ Expiration date (MM/YY)
 CVV
 Complete purchase button
 -->
-<section id="payment">
-    <h2>Payment Details</h2>
-    <form action="/process-payment" method="POST">
-    
-        <label for="card-name">Name on Card:</label>
-        <input type="text" id="card-name" name="cardName" required>
+    <section id="payment">
+        <h2>Payment Details</h2>
+        <form action="/process-payment" method="POST">
 
-        <label for="card-number">Card Number:</label>
-        <input type="text" id="card-number" name="cardNumber" maxlength="16" pattern="\d{16}" placeholder="1234 5678 9012 3456" required>
+            <label for="card-name">Name on Card:</label>
+            <input type="text" id="card-name" name="cardName" required>
 
-        <label for="expiry-date">Expiry Date:</label>
-        <input type="text" id="expiry-date" name="expiryDate" placeholder="MM/YY" pattern="\d{2}/\d{2}" required>
+            <label for="card-number">Card Number:</label>
+            <input type="text" id="card-number" name="cardNumber" maxlength="16" pattern="\d{16}"
+                placeholder="1234 5678 9012 3456" required>
 
-        <label for="cvv">CVV:</label>
-        <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" placeholder="123" required>
+            <label for="expiry-date">Expiry Date:</label>
+            <input type="text" id="expiry-date" name="expiryDate" placeholder="MM/YY" pattern="\d{2}/\d{2}" required>
 
-        <button type="submit" class="btn btn-primary">Complete Purchase</button>
-    </form>
-</section>
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv" maxlength="3" pattern="\d{3}" placeholder="123" required>
 
-<!-- 
+            <button type="submit" class="btn btn-primary">Complete Purchase</button>
+        </form>
+    </section>
+
+    <!-- 
 actions
 "Continue Shopping" link (redirects back to the products page)
 "Proceed to Checkout" link (for finalizing the purchase, if separate)
  -->
-<div id="actions">
-    <a href="/ProjectRepository/ProjectSourceCode/views/pages/shop.hbs" class="btn btn-secondary">Continue Shopping</a>
-    
-    <a href="/ProjectRepository/ProjectSourceCode/views/pages/checkout.hbs" class="btn btn-primary">Proceed to Checkout</a>
-</div>
+    <div id="actions">
+        <a href="/ProjectRepository/ProjectSourceCode/views/pages/shop.hbs" class="btn btn-secondary">Continue
+            Shopping</a>
 
-{{> footer}}
+        <a href="/ProjectRepository/ProjectSourceCode/views/pages/checkout.hbs" class="btn btn-primary">Proceed to
+            Checkout</a>
+    </div>
+
+    {{> footer}}
 
 </body>
+
 </html>
