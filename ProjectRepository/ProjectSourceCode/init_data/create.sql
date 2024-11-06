@@ -1,13 +1,13 @@
 CREATE TABLE users(
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(50),
-    password VARCHAR(50) NOT NULL,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
     firstName vARCHAR(50),
     lastName VARCHAR(50),
-    age INT(5),
-    weight FLOAT(5),
-    height FLOAT(15),
-    fitness_points INT(5)
+    age INT CHECK (age > 0),
+    weight FLOAT CHECK (weight > 0),
+    height FLOAT CHECK (height > 0),
+    fitness_points INT DEFAULT 0
 );
 
 
@@ -30,9 +30,9 @@ The fitness table is meant to contain all the fitness records of users.
 */
 CREATE TABLE fitness(
     fitness_id INT PRIMARY KEY AUTO_INCREMENT,
-    description CHAR(255),
+    description VARCHAR(255),
     workout_time TIME,
-    calories_burned INT(50),
+    calories_burned INT CHECK(calories_burned >= 0)
 );
 
 
