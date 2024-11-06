@@ -1,7 +1,11 @@
 week 11/3-11/10
 
 Updates:
+figured out how to open the website
+resovled git hub divergent branching issues 
 
 Future plans:
+keep working on our project
+edit style of the website 
 
 Highlights: 
