@@ -13,7 +13,6 @@ const axios = require('axios'); //to make HTTP requests from our server.
 
 // App Settings
 // ------------------------------
-
 //create `ExpressHandlebars` instance and configure the layouts and partials dir.
 const hbs = handlebars.create({
   extname: 'hbs', //.hbs becomes default file extention for /views
@@ -65,7 +64,7 @@ app.get('/', (req, res) => {
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
-})
+});
 
 app.get('/register', (req, res) => {
   res.render('pages/register');
