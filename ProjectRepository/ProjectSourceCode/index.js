@@ -1,49 +1,44 @@
-
 // ----------------------------------   DEPENDENCIES  ----------------------------------------------
 
-const express = require('express'); // To build an application server or API
-const app = express();
+const express = require('express'); //To build an application server or API
+const app = express(); //instance of Express
 const handlebars = require('express-handlebars');
-const Handlebars = require('handlebars');
-const path = require('path');
-const pgp = require('pg-promise')(); // To connect to the Postgres DB from the node server
+const Handlebars = require('handlebars'); //core handlebars library
+const path = require('path'); //importing path (for file path manipulation)
+const pgp = require('pg-promise')(); //to connect to the Postgres DB from the node server
 const bodyParser = require('body-parser');
-const session = require('express-session'); // To set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
-const bcrypt = require('bcryptjs'); //  To hash passwords
-const axios = require('axios'); // To make HTTP requests from our server. 
+const session = require('express-session'); //to set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
+const bcrypt = require('bcryptjs'); //to hash passwords
+const axios = require('axios'); //to make HTTP requests from our server. 
 
 // App Settings
 // ------------------------------
 
-// Register `hbs` as our view engine using its bound `engine()` function.
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
-app.set('views', path.join(__dirname, 'views'));
-app.use(bodyParser.json()); // specify the usage of JSON for parsing request body.
+//create `ExpressHandlebars` instance and configure the layouts and partials dir.
+const hbs = handlebars.create({
+  extname: 'hbs', //.hbs becomes default file extention for /views
+  layoutsDir: path.join(__dirname, 'views/layouts'), //layout files directory
+  partialsDir: path.join(__dirname, 'views/partials'), //partial view files directory
+});
 
-// initialize session variables
+//register `hbs` as our view engine using its bound `engine()` function.
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs'); //make handlebars the view engine
+app.set('views', path.join(__dirname, 'views')); //path to views
+app.use(bodyParser.json()); //specify the usage of JSON for parsing request body.
+
+app.use(bodyParser.urlencoded({ extended: true })); //parse URL-encoded data
+
+//initialize session variables
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    saveUninitialized: false,
-    resave: false,
-  })
-);
-
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
+    saveUninitialized: false, //don't save empty sessions
+    resave: false, //no resaving session if not modified
   })
 );
 
 // -------------------------------------  DB CONFIG AND CONNECT   ---------------------------------------
-// create `ExpressHandlebars` instance and configure the layouts and partials dir.
-const hbs = handlebars.create({
-  extname: 'hbs',
-  layoutsDir: __dirname + '/views/layouts',
-  partialsDir: __dirname + '/views/partials',
-});
-
 const dbConfig = {
   host: 'db',
   port: 5432,
@@ -55,51 +50,54 @@ const db = pgp(dbConfig);
 
 // db test
 db.connect()
-  .then(obj => {
-    // Can check the server version here (pg-promise v10.1.0+):
+  .then((obj) => {
     console.log('Database connection successful');
-    obj.done(); // success, release the connection;
-    })
-  .catch(error => {
-    console.log('ERROR', error.message || error);
+    obj.done(); // success, release the connection
+  })
+  .catch((error) => {
+    console.log('ERROR:', error.message || error);
   });
 
 // -------------------------------------  ROUTES   ----------------------------------------------
 app.get('/', (req, res) => {
-    res.redirect('/login'); 
+  res.redirect('/login');
 });
+
+app.get('/login', (req, res) => {
+  res.render('pages/login')
+})
+
 app.get('/register', (req, res) => {
-    res.render('pages/register');
+  res.render('pages/register');
 });
+
 app.post('/login', async (req, res) => {
-    // hash the password using bcrypt library
-    const username = req.body.username;
-    const password = req.body.password;
-    db.oneOrNone('SELECT * FROM users WHERE username = $1', [username])
-    .then(user => {
-      if (!user) {
-        return res.redirect('/register');
-      }
-  
-      bcrypt.compare(password, users.password)
-      .then(match => {
-        if (!match) {
-          return res.render('pages/login', { message: 'Incorrect username or password.' });
-        }
-  
-        req.session.user = user;
-        req.session.save();
-        return res.redirect('/home');
-      });
-    })
-    .catch(error => {
-      console.error(error);
-      return res.render('pages/login', { message: 'An error occurred.' });
+  const username = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
+    if (!user) {
+      return res.redirect('/register');
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      return res.render('pages/login', { message: 'Incorrect username or password.' });
+    }
+
+    req.session.user = user;
+    req.session.save(() => {
+      res.redirect('/home');
     });
+  } catch (error) {
+    console.error(error);
+    res.render('pages/login', { message: 'An error occurred during login.' });
+  }
 });
 
 // Starting the server
-// Keeping the connection open to listen for more requests
-app.listen(3000);
-console.log('Server is listening on port 3000');
-
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
