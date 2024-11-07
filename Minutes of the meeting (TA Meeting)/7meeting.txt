@@ -7,4 +7,8 @@ make the website look better, adding images, working on the storefront
 
 how is the sql going? 
 made database, 3 tables, working well 
+<<<<<<< HEAD
 one to many relationship 
+=======
+one to many relationship 
+>>>>>>> 8578f7788aa3de1dd612827b40ea09301ac0b5fe
