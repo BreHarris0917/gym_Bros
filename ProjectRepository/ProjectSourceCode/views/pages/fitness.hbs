@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {{> head }} <!--Header template from head.hbs-->
+    {{> header }} <!--Header template from head.hbs-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>The Fitness Page</title>
@@ -105,45 +105,45 @@
     {{> footer }}
     <!--Workout timer popup, dynamically starts according to the ID of the workout-->
     <!--Modal specifications:
-            Workout title must be shown, linked dynamically to the data-workout ID.
-            Workout description with similar fashion
-            Timer display: Hour, Minute, Second, Millisecond
-            Timer function to update timer
-            Button to start workout (starts the timer)
-            Button to pause workout (pauses the timer, does not reset)
-            Button to end workout (resets the timer to 0, displays the amount of calories burnt using multiplier factor)
-            Gives points to player (100 calories burnt = 1 point) (?)
+        Workout title must be shown, linked dynamically to the data-workout ID.
+        Workout description with similar fashion
+        Timer display: Hour, Minute, Second, Millisecond
+        Timer function to update timer
+        Button to start workout (starts the timer)
+        Button to pause workout (pauses the timer, does not reset)
+        Button to end workout (resets the timer to 0, displays the amount of calories burnt using multiplier factor)
+        Gives points to player (100 calories burnt = 1 point) (?)
     -->
     <div class="modal fade" id="workoutModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="workoutTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--Ends workout and hopefully(?) resets the timer-->
-                    <!--TODO: onclick for function ending workout-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="endWorkout()"></button> <!--Ends workout and hopefully(?) resets the timer-->
                 </div> <!--Modal header is set dynamically using the id-->
                 <div class="modal-body">
                     <p id="workoutDescription"></p> <!--Just like the header above, dynamically sets the desc according to id-->
                     <div class="timer-display">
                         <h5>Time: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span></h5>
                     </div> <!--Timer that functions with multiple time variables that go to milliseconds, but do we even need milliseconds?-->
-                    <button class="btn btn-primary mt-3" id="timerBtn">Timer Start</button> <!--Starts the function and toggles timer on/off-->
+                    <button class="btn btn-primary mt-3" id="timerBtn" onclick="toggleTimer()">Timer Start</button> <!--Starts the function and toggles timer on/off-->
                     <!--TODO: onclick for function starting timer-->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger">End Workout</button> <!--End workout function, resets timer, red button!-->
-                    <!--TODO: onclick for function ending workout-->
+                    <button type="button" class="btn btn-danger" onclick="endWorkout()">End Workout</button> <!--End workout function, resets timer-->
                 </div>
             </div>
         </div>
     </div>
     <script>
-        //TODO: Variables
-        //workout number variable
-        //timer variable
-        //interval variable for timer updating
-        //multipliers (array?)
-        //boolean for timer toggle
+        //Variables
+        let workoutNumber = 0;
+        let timer = { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }; //Timer is set to 0
+        let timerInterval = null; //For timer updating
+        const multipliers = { 1: 0.1, 2: 0.2, 3: 0.3, 4: 0.4, 5: 0.5, 6: 0.6, 7: 0.7, 8: 0.8, 9: 0.9 };
+        //Alright so I don't know how calories work so I added these 9 factors that when multiplied with the time, outputs total calories burnt
+        let isRunning = false; //Check if timer is on
+        let originalTitle = ""; //Title for resetting later
 
         //TODO: Modal open, dynamic update
         //document.querySelectorAll('.start-workout-btn').forEach(button => {button.addEventListener('click', () => {});  });
@@ -155,30 +155,96 @@
         //new bootstrap.Modal(document.getElementById('workoutModal')); pop out
         //.show
 
-        //TODO: Timer toggle function
-        //if timer is not running, toggle boolean and then change the text of timer (Stop Timer)
-        //start updating intervals with ms
-        //else, toggle boolean and then change the text of timer (Resume Timer)
-        //stop updating timer
+        //What am I even doing
+        
+        //workoutNumber = parseInt attribute get data-workout
+        //originalTitle = `Workout ${workoutNumber}`; //Setting the original title so that we can reset it later
+        //document.getElementById workoutTitle = $Number
+        //document.getElementById workoutDescription = $Number
+        //resetTimer();
 
-        //TODO: Timer interval update
-        //1000ms = 1s
-        //60s = 1m
-        //60m = 1h
-        //24h = 1d
-        //update text (text != variable, we need to update both)
+        //Timer toggling, pausing and restarting the timer, does not reset timer to 0.
+        function toggleTimer() {
+            if (!isRunning) { //Is the timer not running?
+                isRunning = true; //It is now
+                document.getElementById('timerBtn').innerText = "Timer End"; //If the timer is running the text is changed to "End"
+                timerInterval = setInterval(updateTimer, 10); //Updating the timer every 10 ms
+            } else { //Is the timer running
+                isRunning = false; //Nah, pause the timer
+                document.getElementById('timerBtn').innerText = "Timer Start"; //If the timer is not running the text is changed to "Start"
+                clearInterval(timerInterval); //Stop updating the timer, bro
+            }
+        }
+        //Function to update the timer
+        function updateTimer() {
+            timer.milliseconds += 10; //Add 10ms
+            if (timer.milliseconds >= 1000) { //1000ms = 1s
+                timer.milliseconds = 0; //Since we have 1s, 1000ms is reset to 0ms
+                timer.seconds++; //Add 1s
+            }
+            if (timer.seconds >= 60) { //60s = 1m
+                timer.seconds = 0; //Since we have 1m, 60s is reset to 0s
+                timer.minutes++; //Add 1m
+            }
+            if (timer.minutes >= 60) { //60m = 1h
+                timer.minutes = 0; //Since we have 1h, 60m is reset to 0m
+                timer.hours++; //Add 1h 
+            } //Guys should we add a day timer too? Are people working out for days or what?
 
-        //TODO: End the workout
-        //clear timer, reset text, toggle boolean
-        //run a calorie calculator (use seconds)
-        //calories burned = seconds * multiplier[array pos]
-        //display calories burned
-        //reset timer
-        //close modal
+            //Timer display update
+            document.getElementById('hours').innerText = String(timer.hours).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(timer.minutes).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(timer.seconds).padStart(2, '0');
+            document.getElementById('milliseconds').innerText = String(timer.milliseconds).padStart(3, '0'); //Displays 3 digits
+        }
+        //Ending workout, also need to calculate the number of calories burnt, workout multiplier x timer
+        function endWorkout() {
+            clearInterval(timerInterval); //Clear the timer
+            isRunning = false; //Timer is running no more!!
+            document.getElementById('timerBtn').innerText = "Timer Start"; //Reset timer back to "timer start"
 
-        //TODO: Timer reset
-        //reset varaibles
-        //reset text
+            //We calculate the amount of seconds in the timer
+            const totalSeconds = timer.hours * 3600 + timer.minutes * 60 + timer.seconds + (timer.milliseconds / 1000);
+            const caloriesBurned = (totalSeconds * multipliers[workoutNumber]).toFixed(2); //Multiplies the multiplier of the workout (listed in variables) with seconds, returns caloriesBurned
+
+            //This is how many calories you burned:
+            //Select the workout card by ID and update its title to display calories burned
+            const workoutCardTitle = document.querySelector(`#workout-${workoutNumber} .card-title`);
+            workoutCardTitle.innerText = `Workout ${workoutNumber} - Calories burned: ${caloriesBurned} kcal`;
+
+            //Resets the timer cuz you're done
+            resetTimer();
+            bootstrap.Modal.getInstance(document.getElementById('workoutModal')).hide(); //Close the modal
+        }
+        //Reset the timer to 0
+        function resetTimer() {
+            timer = { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }; //Set timer values to zero
+            isRunning = false; //Timer aint running no more
+            document.getElementById('timerBtn').innerText = "Timer Start"; //Resetting the text so that it "resets" back to Timer Start
+
+            //Update timer display to show all zeroes
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            document.getElementById('milliseconds').innerText = '000';
+
+            //Reset the workout card title to its original format
+            const workoutCardTitle = document.querySelector(`#workout-${workoutNumber} .card-title`); //At the end of workout, displays the calories burnt so this resets that
+            workoutCardTitle.innerText = originalTitle; 
+        }
+
+        //TODO: Point system, 100 kcal = 1 point (?)
+        //Maybe add this to the endWorkout function:
+        //const points = cal / 100
+        //if points > 0, "congrats bro"
+        //new function: addPoints(points)
+
+        //TODO: addPoints() function
+        //<form action="/login" method="POST"> //Okay not this because we're writing a script but you get the gist of it
+        //{{user}}
+        //points: points
+        //Maybe error message if unresponsive, success message if points are updated
+        //</form>
 
     </script>
     <!--Javascript-->
