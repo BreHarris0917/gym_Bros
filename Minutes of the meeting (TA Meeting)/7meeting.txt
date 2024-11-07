@@ -1,0 +1,10 @@
+feedback:
+api optional 
+bring down the load for the coding
+
+plans: 
+make the website look better, adding images, working on the storefront
+
+how is the sql going? 
+made database, 3 tables, working well 
+one to many relationship 
