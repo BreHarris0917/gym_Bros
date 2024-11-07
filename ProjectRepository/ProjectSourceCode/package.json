@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-    "name": "<TODO: project-name>",
-=======
     "name": "gymbros",
->>>>>>> 8578f7788aa3de1dd612827b40ea09301ac0b5fe
     "main": "src/index.js",
     "dependencies": {
       "express": "^4.6.1",
