@@ -74,10 +74,15 @@ app.post('/register', async (req, res) => {
   //hash the password using bcrypt library
   const username = req.body.username;
   const password = req.body.password;
+  const email = req.body.email;
+  const age = req.body.age;
+  const weight = req.body.weight;
+  const height = req.body.height;
+  const query = 'INSERT INTO users (username, password, email, age, weight, height) VALUES ($1, $2, $3, $4, $5, $6);';
   
   bcrypt.hash(password, 10)
   .then(hash => {
-    return db.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hash]);
+    return db.query(query, [username, hash, email, age, weight, height]);
   })
   .then(() => {
     res.redirect('/login');
@@ -111,6 +116,10 @@ app.post('/login', async (req, res) => {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
   }
+});
+
+app.get('/home', (req, res) => {
+  res.render('pages/home');
 });
 
 app.get('/logout', (req, res) => {
