@@ -95,6 +95,11 @@ app.post('/login', async (req, res) => {
   }
 });
 
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.render('pages/logout');
+});
+
 // Starting the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
