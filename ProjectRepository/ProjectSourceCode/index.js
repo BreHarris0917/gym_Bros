@@ -70,6 +70,24 @@ app.get('/register', (req, res) => {
   res.render('pages/register');
 });
 
+app.post('/register', async (req, res) => {
+  //hash the password using bcrypt library
+  const username = req.body.username;
+  const password = req.body.password;
+  
+  bcrypt.hash(password, 10)
+  .then(hash => {
+    return db.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hash]);
+  })
+  .then(() => {
+    res.redirect('/login');
+  })
+  .catch(error => {
+    console.error(error);
+    res.render('pages/register', { message: 'Registration failed.' });
+  });
+});
+
 app.post('/login', async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
@@ -93,6 +111,11 @@ app.post('/login', async (req, res) => {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
   }
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.render('pages/logout');
 });
 
 // Starting the server
