@@ -1,11 +1,23 @@
 week 11/3-11/10
 
 Updates:
-figured out how to open the website
+figured out how to open the website (docker issues)
 resovled git hub divergent branching issues 
 
 Future plans:
 keep working on our project
 edit style of the website 
+now that we can access the website, debugging, stylistic aspects, testing
+maybe creating the test file?
+keep working on the storefront, adding images, descriptions, etc.. 
 
-Highlights: 
+Update the status of user stories on the GitHub project board (y/n)?
+y
+Updated GitHub repository with the latest code before meeting (y/n)? 
+y
+Consistent commits during the week (commits on at least 3 days of the week) (y/n)?
+y
+Individual contribution - meaningful commits (y/n)? 
+y
+
+

@@ -1,4 +1,4 @@
-TA meeting1 Octov=ber 31st 
+TA meeting1 October 31st 
 
 We talked about our challenges that we have been facing with this issues so far. :
 Majority of us were struggling with the git commands and the merging.pulling conflicts > resolved! (discussed git commands and reviewed how branches work)
