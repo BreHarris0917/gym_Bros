@@ -1,9 +1,8 @@
-CREATE TABLE users(
+CREATE TABLE IF NOT EXISTS users(
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    firstName VARCHAR(50),
-    lastName VARCHAR(50),
+    email VARCHAR(100) NOT NULL,
     age INT CHECK (age > 0),
     weight FLOAT CHECK (weight > 0),
     height FLOAT CHECK (height > 0),
@@ -14,7 +13,7 @@ CREATE TABLE users(
 /*
 This table connects users to all their fitness information
 */
-CREATE TABLE usersToFitness(
+CREATE TABLE IF NOT EXISTS usersToFitness(
     user_id INT,
     fitness_id INT,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
@@ -28,8 +27,8 @@ CREATE TABLE usersToFitness(
 /*
 The fitness table is meant to contain all the fitness records of users. 
 */
-CREATE TABLE fitness(
-    fitness_id INT PRIMARY KEY AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS fitness(
+    fitness_id SERIAL PRIMARY KEY ,
     description VARCHAR(255),
     workout_time TIME,
     calories_burned INT CHECK(calories_burned >= 0)
