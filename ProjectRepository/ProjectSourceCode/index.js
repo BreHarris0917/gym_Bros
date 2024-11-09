@@ -66,6 +66,10 @@ app.get('/login', (req, res) => {
   res.render('pages/login')
 });
 
+app.get('/fitness', (req, res) => {
+  res.render('pages/fitness')
+});
+
 app.post('/register', async (req, res) => {
   //hash the password using bcrypt library
   const username = req.body.username;

@@ -14,89 +14,89 @@
     <div class="container mt-5">
         <h2 class="text-center">Welcome, {{first_name}}!</h2>
     </div>
-    <div class="container mt-4">
+    <div class="container mt-5">
         <div class="row">
             <!--Workout cards, feel free to add more workouts if needed-->
             <!--TODO: change workout names and descriptions to whatever workouts-->
-            <div class="col-md-4 mb-4" id="workout-1">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 1</h5> <!--Workout title-->
                         <p class="card-text">Description for Workout 1</p> <!--Workout desc.-->
-                        <button class="btn btn-primary start-workout-btn" data-workout="1">Start Workout</button> <!--Opens timer popup-->
+                         <button class="start-workout-btn btn btn-primary" data-workout="1" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button> <!--Opens timer popup-->
                         <!--data-workout for dynamic ID based modal manipulation-->
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-2">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 2</h5>
                         <p class="card-text">Description for Workout 2</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="2">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="2" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-3">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 3</h5>
                         <p class="card-text">Description for Workout 3</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="3">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="3" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-4">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 4</h5>
                         <p class="card-text">Description for Workout 4</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="4">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="4" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-5">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 5</h5>
                         <p class="card-text">Description for Workout 5</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="5">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="5" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-6">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 6</h5>
                         <p class="card-text">Description for Workout 6</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="6">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="6" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-7">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 7</h5>
                         <p class="card-text">Description for Workout 7</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="7">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="7" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-8">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 8</h5>
                         <p class="card-text">Description for Workout 8</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="8">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="8" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4" id="workout-9">
+            <div class="col-md-4 mb-4">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Workout 9</h5>
                         <p class="card-text">Description for Workout 9</p>
-                        <button class="btn btn-primary start-workout-btn" data-workout="9">Start Workout</button>
+                         <button class="start-workout-btn btn btn-primary" data-workout="9" data-bs-toggle="modal" data-bs-target="#workoutModal">Start Workout</button>
                     </div>
                 </div>
             </div>
@@ -114,27 +114,49 @@
         Button to end workout (resets the timer to 0, displays the amount of calories burnt using multiplier factor)
         Gives points to player (100 calories burnt = 1 point) (?)
     -->
-    <div class="modal fade" id="workoutModal" tabindex="-1" aria-hidden="true">
+    <!--Workout Timer-->
+    <div class="modal fade" id="workoutModal" tabindex="-1" aria-labelledby="workoutModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="workoutTitle"></h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="endWorkout()"></button> <!--Ends workout and hopefully(?) resets the timer-->
-                </div> <!--Modal header is set dynamically using the id-->
-                <div class="modal-body">
-                    <p id="workoutDescription"></p> <!--Just like the header above, dynamically sets the desc according to id-->
-                    <div class="timer-display">
-                        <h5>Time: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span></h5>
-                    </div> <!--Timer that functions with multiple time variables that go to milliseconds, but do we even need milliseconds?-->
-                    <button class="btn btn-primary mt-3" id="timerBtn" onclick="toggleTimer()">Timer Start</button> <!--Starts the function and toggles timer on/off-->
-                    <!--TODO: onclick for function starting timer-->
+                    <h5 class="modal-title" id="workoutTitle">Workout Timer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> <!--I hope this works (Closes the modal)-->
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" onclick="endWorkout()">End Workout</button> <!--End workout function, resets timer-->
+                <div class="modal-body">
+                    <p id="workoutDescription">Description of the workout.</p> 
+                    <!--Display of timer inside modal-->
+                    <p>Time: <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>:<span id="milliseconds">000</span></p> <!--Timer that functions with multiple time variables that go to milliseconds, but do we even need milliseconds?-->
+                    <!-- Timer and End Workout buttons -->
+                    <button id="timerBtn" class="btn btn-primary" onclick="toggleTimer()">Timer Start</button> <!--Starts the function and toggles timer on/off-->
+                    <button class="btn btn-danger" onclick="endWorkout()">End Workout</button> <!--Ends workout and hopefully(?) resets the timer-->
                 </div>
             </div>
         </div>
     </div>
+    <!--Workout Summary
+        Workout summary will show calories, points earned, and total workout time
+        Seperate modal popup
+    -->
+    <div class="modal fade" id="workoutSummaryModal" tabindex="-1" aria-labelledby="workoutSummaryModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="workoutSummaryTitle">Workout Summary</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="summaryWorkout">Workout: </p>
+                    <p id="summaryTime">Time Worked Out: </p>
+                    <p id="summaryCalories">Calories Burned: </p>
+                </div> <!--Show the user's stats-->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Loading in bootstrap js-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         //Variables
         let workoutNumber = 0;
@@ -145,23 +167,19 @@
         let isRunning = false; //Check if timer is on
         let originalTitle = ""; //Title for resetting later
 
-        //TODO: Modal open, dynamic update
-        //document.querySelectorAll('.start-workout-btn').forEach(button => {button.addEventListener('click', () => {});  });
-        //open the workout modal with the start workout button
-        //event listener so that when user clicks, parseInt the attribute of data-workout ID, sets this to workout number variable from above
-        //get the title
-        //get the dexcription
-        //reset the timer
-        //new bootstrap.Modal(document.getElementById('workoutModal')); pop out
-        //.show
-
-        //What am I even doing
-        
-        //workoutNumber = parseInt attribute get data-workout
-        //originalTitle = `Workout ${workoutNumber}`; //Setting the original title so that we can reset it later
-        //document.getElementById workoutTitle = $Number
-        //document.getElementById workoutDescription = $Number
-        //resetTimer();
+        //Event listeners that depend on the click of the Start Workout button
+        document.addEventListener('DOMContentLoaded', () => { //DOM content checks for complete parse of the document, does not check for stylesheets
+            document.querySelectorAll('.start-workout-btn').forEach(button => { //Check for star workout button click (below)
+                button.addEventListener('click', () => {
+                    //Set variable workoutNumber to the ID of workout
+                    workoutNumber = parseInt(button.getAttribute('data-workout'));
+                    //Set the title and description dynamically to whatever the workout ID is
+                    document.getElementById('workoutTitle').innerText = `Workout ${workoutNumber}`;
+                    document.getElementById('workoutDescription').innerText = `Description for Workout ${workoutNumber}`;
+                    resetTimer(); //resetting timer
+                });
+            });
+        });
 
         //Timer toggling, pausing and restarting the timer, does not reset timer to 0.
         function toggleTimer() {
@@ -206,15 +224,19 @@
             //We calculate the amount of seconds in the timer
             const totalSeconds = timer.hours * 3600 + timer.minutes * 60 + timer.seconds + (timer.milliseconds / 1000);
             const caloriesBurned = (totalSeconds * multipliers[workoutNumber]).toFixed(2); //Multiplies the multiplier of the workout (listed in variables) with seconds, returns caloriesBurned
+            const timeWorkedOut = `${String(timer.hours).padStart(2, '0')}:${String(timer.minutes).padStart(2, '0')}:${String(timer.seconds).padStart(2, '0')}`; //Worked out time, displays with hour : minute : second
 
-            //This is how many calories you burned:
-            //Select the workout card by ID and update its title to display calories burned
-            const workoutCardTitle = document.querySelector(`#workout-${workoutNumber} .card-title`);
-            workoutCardTitle.innerText = `Workout ${workoutNumber} - Calories burned: ${caloriesBurned} kcal`;
+            //Staging workout summary data so that it shows up in the summary modal
+            document.getElementById('summaryWorkout').innerText = `Workout: Workout ${workoutNumber}`;
+            document.getElementById('summaryTime').innerText = `Time Worked Out: ${timeWorkedOut}`;
+            document.getElementById('summaryCalories').innerText = `Calories Burned: ${caloriesBurned} kcal`;
 
             //Resets the timer cuz you're done
             resetTimer();
-            bootstrap.Modal.getInstance(document.getElementById('workoutModal')).hide(); //Close the modal
+            const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
+            workoutModal.hide(); //Closing the modal to open the summary modal
+            const workoutSummaryModal = new bootstrap.Modal(document.getElementById('workoutSummaryModal'));
+            workoutSummaryModal.show(); //Show the summary
         }
         //Reset the timer to 0
         function resetTimer() {
@@ -227,10 +249,6 @@
             document.getElementById('minutes').innerText = '00';
             document.getElementById('seconds').innerText = '00';
             document.getElementById('milliseconds').innerText = '000';
-
-            //Reset the workout card title to its original format
-            const workoutCardTitle = document.querySelector(`#workout-${workoutNumber} .card-title`); //At the end of workout, displays the calories burnt so this resets that
-            workoutCardTitle.innerText = originalTitle; 
         }
 
         //TODO: Point system, 100 kcal = 1 point (?)
@@ -247,8 +265,5 @@
         //</form>
 
     </script>
-    <!--Javascript-->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
 </body>
 </html>
