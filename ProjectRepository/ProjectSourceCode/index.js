@@ -59,7 +59,11 @@ db.connect()
 
 // -------------------------------------  ROUTES   ----------------------------------------------
 app.get('/', (req, res) => {
-  res.redirect('/login');
+  res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+  res.render('pages/home')
 });
 
 app.get('/login', (req, res) => {
@@ -72,6 +76,18 @@ app.get('/register', (req, res) => {
 
 app.get('/fitness', (req, res) => {
   res.render('pages/fitness')
+});
+
+app.get('/shop', (req, res) => {
+  res.render('pages/shop')
+});
+
+app.get('/cart', (req, res) => {
+  res.render('pages/cart')
+});
+
+app.get('/checkout', (req, res) => {
+  res.render('pages/checkout')
 });
 
 app.post('/register', async (req, res) => {
