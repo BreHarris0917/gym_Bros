@@ -1,62 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {{> header }} <!--Header template from head.hbs-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Shop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <h1>Shop Our Products</h1>
-        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
-    </header>
-
     <!-- display all the shopable items...-->
-    <!-- what things are in shop... atheltic wear. protein powder? 
-Table style? 
--->
-    <header>
+    <!-- what things are in shop... athletic wear, protein powder? 
+    Table style? 
+    
+    possible items to include :
+    1. Supplements & Nutrition
+    Protein Powders: Whey protein, plant-based protein, casein, collagen
+    Pre-Workout and Post-Workout: Caffeine-based and natural energy boosters, BCAAs, creatine
+    Vitamins & Minerals: Multivitamins, fish oil, vitamin D, magnesium, electrolyte powders
+    Meal Replacements & Bars: Protein bars, meal shakes, snack bars
+    Hydration: Electrolyte supplements, hydration tablets, water enhancers
+    Health Foods: Superfood powders (spirulina, matcha, maca), nut butters, dried fruit packs
+    
+    2. Exercise Equipment
+    Weights: Dumbbells, kettlebells, barbells, adjustable weight sets
+    Resistance Bands: Different resistance levels, loop bands, therapy bands
+    Yoga Mats & Foam Rollers: High-quality yoga mats, foam rollers, massage balls
+    Jump Ropes: Speed ropes, weighted jump ropes
+    Bodyweight Equipment: Pull-up bars, push-up bars, dip bars
+    Core Equipment: Ab wheels, stability balls, balance boards
+    Boxing & MMA Gear: Boxing gloves, punching bags, hand wraps
+    
+    3. Apparel & Accessories
+    Activewear: Leggings, shorts, sports bras, tank tops, T-shirts, jackets
+    Footwear: Running shoes, cross-training shoes, weightlifting shoes
+    Compression Wear: Compression socks, sleeves, pants, and shirts for recovery
+    Accessories: Workout gloves, weightlifting belts, knee and elbow sleeves, headbands
+    Gym Bags: Backpacks, duffle bags, water-resistant gym bags
+    
+    4. Recovery & Wellness Tools
+    Massage Tools: Massage guns, muscle scrapers, massage balls
+    Therapy Tools: Cold packs, heating pads, kinesiology tape
+    Sleep & Relaxation Aids: Melatonin supplements, sleep masks, lavender sprays
+    Recovery Drinks: Protein shakes, electrolyte drinks, hydration packs
+    
+    5. Fitness Technology
+    Wearable Trackers: Smartwatches, heart rate monitors, fitness trackers
+    Smart Home Gym Equipment: Adjustable dumbbells, resistance machines, smart mirrors
+    Apps & Subscriptions: Subscription-based fitness plans, workout guides, meal planners
+    
+    6. Lifestyle & Meal Prep
+    Shakers & Water Bottles: Insulated bottles, shaker cups, infuser water bottles
+    Meal Prep Containers: BPA-free containers, compartmentalized lunch boxes
+    Kitchen Gadgets: Blender bottles, food scales, measuring cups
+    
+    7. Books & Guides
+    Fitness Books: Books on strength training, flexibility, nutrition
+    Workout Plans: Printed or downloadable workout guides, meal plans
+    -->
+
+    <!-- Page Header -->
+    <header class="container text-center my-4">
         <h1>Shop Our Products</h1>
-        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
+        <a href="cart" class="btn btn-primary mt-2">View Cart</a>
     </header>
 
-    <section id="shop-items">
-        <table class="table">
-            <thead>
+    <!-- Shop Items Section -->
+    <section id="shop-items" class="container">
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <th>Product Image</th>
-                    <th>Product Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Add to Cart</th>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Purchase</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- idea for clothing -->
+                <!-- Product 1: Whey Protein Powder -->
                 <tr>
-                    <td>alt="Athletic Wear" class="product-image"</td><!-- find pgoto to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/athletic-wear.jpg" -->
-                    <td>Athletic Wear</td>
-                    <td>Comfortable, high-performance sportswear for all activities.</td>
-                    <td>$40.00</td>
-                    <td><button class="btn btn-add-to-cart" data-id="athletic-wear">Add to Cart</button></td>
+                    <td class="text-center">
+                        <img src="../../resources/img/wheypowder.JPG" class="img-fluid rounded" alt="Whey Protein" width="150"
+                            height="150">
+                    </td>
+                    <!-- find photo to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/protein-powder.jpg" -->
+                    <td>Optimum Nutrition Gold Standard 100% Whey Protein Powder, Delicious Strawberry, 5 Pound</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Optimum Nutrition</li>
+                            <li><strong>Flavor:</strong> Delicious Strawberry</li>
+                            <li><strong>Servings per Container:</strong> 73</li>
+                            <li><strong>Item Weight:</strong> 80 Ounces</li>
+                            <li><strong>Material Type Free:</strong> No Sucralose</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li>Made in USA</li>
+                            <li>Packaging may vary - New look, with the same trusted quality</li>
+                            <li><strong>Gold Standard 100% Whey Blend</strong> - Contains 24 grams of blended protein,
+                                including whey protein isolate, whey protein concentrate, and whey peptides to support
+                                lean muscle mass.</li>
+                            <li><strong>BCAA Content</strong> - Over 5 grams of BCAAs to help build lean and strong
+                                muscles, with 3-4 grams carbs, 1-3 grams sugar, and 1-1.5 grams fat. Gluten-free and no
+                                sucralose in the Delicious Strawberry flavor.</li>
+                            <li><em>Notice:</em> Do not use as a sole source of nutrition.</li>
+                            <li><strong>Any-time Formula</strong> - Suitable for consumption before or after exercise,
+                                between meals, with a meal, or any time you need extra protein in your diet.</li>
+                            <li><strong>Most Awarded, Best-Selling Whey Protein Powder</strong> - Top choice worldwide,
+                                tested for banned substances to ensure the highest quality and safety.</li>
+                        </ul>
+                    </td>
+                    <td>$85.99</td>
+                    <td><button class="btn btn-success">Add to Cart</button></td>
                 </tr>
-                <!-- Idea for protein powder -->
+
+                <!-- Product 2: Orgain Protein Powder -->
                 <tr>
-                    <td> alt="Protein Powder" class="product-image"</td> <!-- find photo to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/protein-powder.jpg" -->
-                    <td>Protein Powder</td>
-                    <td>High-quality protein powder for muscle growth and recovery.</td>
-                    <td>$25.00</td>
-                    <td><button class="btn btn-add-to-cart" data-id="protein-powder">Add to Cart</button></td>
+                    <td class="text-center">
+                        <img src="/ProjectRepository/ProjectSourceCode/resources/img/orgainprotein.JPG" class="img-fluid rounded" alt="Orgain Protein" width="150"
+                            height="150">
+                    </td>
+                    <!-- find photo to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/protein-powder.jpg" -->
+                    <td>Orgain Organic Vegan Plant Based Protein Powder - Vanilla Bean - 16.32oz</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Orgain</li>
+                            <li><strong>Flavor:</strong> Vanilla Bean</li>
+                            <li><strong>Servings per Container:</strong> Varies</li>
+                            <li><strong>Item Weight:</strong> Not specified</li>
+                            <li><strong>Material Type Free:</strong> No GMOs, soy, gluten, dairy, artificial colors,
+                                flavors, sweeteners, or preservatives</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li><strong>CLEANER INGREDIENTS</strong> - 21g plant protein and less than 1g sugar per
+                                serving. Contains organic peas, brown rice, mung bean, and chia seeds for a complete
+                                protein with all nine essential amino acids. Includes 4g of prebiotics and fiber for gut
+                                support.</li>
+                            <li><strong>HIGHER STANDARDS</strong> - Made without GMOs, carrageenan, soy, gluten, dairy,
+                                artificial colors, flavors, sweeteners, or preservatives.</li>
+                            <li><strong>USDA ORGANIC & CERTIFIED PLANT-BASED</strong> - Third-party certified for
+                                high-quality, organic, and plant-based ingredients.</li>
+                            <li><strong>CUSTOMIZABLE</strong> - Can be mixed with water, almond milk, or oat milk, or
+                                blended into smoothies. Great for adding to overnight oats, cookies, brownies, and other
+                                baked goods.</li>
+                            <li><strong>PERFECT FOR ANY LIFESTYLE</strong> - Suitable for anyone looking to maintain a
+                                healthy lifestyle, support workout recovery, increase protein intake, or follow specific
+                                dietary regimens.</li>
+                            <li><strong>#1 PLANT PROTEIN POWDER BRAND</strong> - Recognized as the #1 plant protein
+                                powder brand in the U.S. for quality and satisfaction.</li>
+                        </ul>
+                    </td>
+                    <td>$19.99</td>
+                    <td><button class="btn btn-success">Add to Cart</button></td>
                 </tr>
             </tbody>
         </table>
     </section>
 
-
-    {{> footer}}
-
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

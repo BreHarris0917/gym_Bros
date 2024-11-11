@@ -37,6 +37,7 @@ app.use(
   })
 );
 
+
 // -------------------------------------  DB CONFIG AND CONNECT   ---------------------------------------
 const dbConfig = {
   host: 'db',
@@ -59,7 +60,11 @@ db.connect()
 
 // -------------------------------------  ROUTES   ----------------------------------------------
 app.get('/', (req, res) => {
-  res.redirect('/login');
+  res.redirect('/home');
+});
+
+app.get('/home', (req, res) => {
+  res.render('pages/home')
 });
 
 app.get('/login', (req, res) => {
@@ -67,7 +72,46 @@ app.get('/login', (req, res) => {
 });
 
 app.get('/register', (req, res) => {
-  res.render('pages/register');
+  res.render('pages/register')
+});
+
+app.get('/fitness', (req, res) => {
+  res.render('pages/fitness')
+});
+
+app.get('/shop', (req, res) => {
+  res.render('pages/shop')
+});
+
+app.get('/cart', (req, res) => {
+  res.render('pages/cart')
+});
+
+app.get('/checkout', (req, res) => {
+  res.render('pages/checkout')
+});
+
+app.post('/register', async (req, res) => {
+  //hash the password using bcrypt library
+  const username = req.body.username;
+  const password = req.body.password;
+  const email = req.body.email;
+  const age = req.body.age;
+  const weight = req.body.weight;
+  const height = req.body.height;
+  const query = 'INSERT INTO users (username, password, email, age, weight, height) VALUES ($1, $2, $3, $4, $5, $6);';
+  
+  bcrypt.hash(password, 10)
+  .then(hash => {
+    return db.query(query, [username, hash, email, age, weight, height]);
+  })
+  .then(() => {
+    res.redirect('/login');
+  })
+  .catch(error => {
+    console.error(error);
+    res.render('pages/register', { message: 'Registration failed.' });
+  });
 });
 
 app.post('/login', async (req, res) => {
@@ -93,6 +137,15 @@ app.post('/login', async (req, res) => {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
   }
+});
+
+app.get('/home', (req, res) => {
+  res.render('pages/home');
+});
+
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.render('pages/logout');
 });
 
 // Starting the server
