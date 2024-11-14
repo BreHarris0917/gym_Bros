@@ -1,62 +1,401 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     {{> header }} <!--Header template from head.hbs-->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Shop</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> 
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <h1>Shop Our Products</h1>
-        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
+
+    <!-- Page hader with bootstrap styling -->
+    <header class="container-fluid bg-primary text-white py-3 mb-4 shadow-sm">
+        <div class="container d-flex align-items-center justify-content-between">
+            <h1 class="display-5 mb-0">Shop Our Products</h1>
+            {{!-- <a href="cart" class="btn btn-outline-light btn-lg">View Cart <i class="bi bi-cart"></i></a> --}}
+        </div>
     </header>
 
+
+
+    <!-- Shop Items Section -->
     <!-- display all the shopable items...-->
-    <!-- what things are in shop... atheltic wear. protein powder? 
-Table style? 
--->
-    <header>
-        <h1>Shop Our Products</h1>
-        <a href="/ProjectRepository/ProjectSourceCode/views/pages/cart.hbs" class="cart-link">View Cart</a>
-    </header>
+    <!-- what things are in shop... athletic wear, protein powder? 
+    Table style? 
+    
+    possible items to include :
+    1. Supplements & Nutrition
+    Protein Powders: Whey protein, plant-based protein, casein, collagen
+    Pre-Workout and Post-Workout: Caffeine-based and natural energy boosters, BCAAs, creatine
+    Vitamins & Minerals: Multivitamins, fish oil, vitamin D, magnesium, electrolyte powders
+    Meal Replacements & Bars: Protein bars, meal shakes, snack bars
+    Hydration: Electrolyte supplements, hydration tablets, water enhancers
+    Health Foods: Superfood powders (spirulina, matcha, maca), nut butters, dried fruit packs
+    
+    2. Exercise Equipment
+    Weights: Dumbbells, kettlebells, barbells, adjustable weight sets
+    Resistance Bands: Different resistance levels, loop bands, therapy bands
+    Yoga Mats & Foam Rollers: High-quality yoga mats, foam rollers, massage balls
+    Jump Ropes: Speed ropes, weighted jump ropes
+    Bodyweight Equipment: Pull-up bars, push-up bars, dip bars
+    Core Equipment: Ab wheels, stability balls, balance boards
+    Boxing & MMA Gear: Boxing gloves, punching bags, hand wraps
+    
+    3. Recovery & Wellness Tools
+    Massage Tools: Massage guns, muscle scrapers, massage balls
+    Therapy Tools: Cold packs, heating pads, kinesiology tape
+    Sleep & Relaxation Aids: Melatonin supplements, sleep masks, lavender sprays
+    Recovery Drinks: Protein shakes, electrolyte drinks, hydration packs
+    
+    5. Lifestyle & Meal Prep
+    Shakers & Water Bottles: Insulated bottles, shaker cups, infuser water bottles
+    Meal Prep Containers: BPA-free containers, compartmentalized lunch boxes
+    Kitchen Gadgets: Blender bottles, food scales, measuring cups
+    
+    -->
 
-    <section id="shop-items">
-        <table class="table">
-            <thead>
+
+
+    <!-- Navbar for Categories -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm py-2">
+        <div class="container">
+            <a class="navbar-brand mx-auto fw-bold text-primary" href="#">Shop Categories</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#supplements"
+                            style="transition: all 0.3s;">Supplements & Nutrition</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#equipment"
+                            style="transition: all 0.3s;">Exercise Equipment</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#recovery"
+                            style="transition: all 0.3s;">Recovery & Wellness</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#lifestyle"
+                            style="transition: all 0.3s;">Lifestyle & Meal Prep</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Shop Items Section -->
+    <section id="supplements" class="container mt-5">
+        <h2>Supplements & Nutrition</h2>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <th>Product Image</th>
-                    <th>Product Name</th>
-                    <th>Description</th>
-                    <th>Price</th>
-                    <th>Add to Cart</th>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Purchase</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- idea for clothing -->
+                <!-- Product 1: Whey Protein Powder -->
                 <tr>
-                    <td>alt="Athletic Wear" class="product-image"</td><!-- find pgoto to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/athletic-wear.jpg" -->
-                    <td>Athletic Wear</td>
-                    <td>Comfortable, high-performance sportswear for all activities.</td>
-                    <td>$40.00</td>
-                    <td><button class="btn btn-add-to-cart" data-id="athletic-wear">Add to Cart</button></td>
+                    <td class="text-center">
+                        <img src="https://m.media-amazon.com/images/I/81aEbH-WUYL._AC_UF1000,1000_QL80_.jpg"
+                            class="img-fluid rounded" alt="Whey Protein" width="150" height="150">
+                    </td>
+                    <td>Optimum Nutrition Gold Standard 100% Whey Protein Powder, Delicious Strawberry, 5 Pound</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Optimum Nutrition</li>
+                            <li><strong>Flavor:</strong> Delicious Strawberry</li>
+                            <li><strong>Servings per Container:</strong> 73</li>
+                            <li><strong>Item Weight:</strong> 80 Ounces</li>
+                            <li><strong>Material Type Free:</strong> No Sucralose</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li>Made in USA</li>
+                            <li>Packaging may vary - New look, with the same trusted quality</li>
+                            <li><strong>Gold Standard 100% Whey Blend</strong> - Contains 24 grams of blended protein,
+                                including whey protein isolate, whey protein concentrate, and whey peptides to support
+                                lean muscle mass.</li>
+                            <li><strong>BCAA Content</strong> - Over 5 grams of BCAAs to help build lean and strong
+                                muscles, with 3-4 grams carbs, 1-3 grams sugar, and 1-1.5 grams fat. Gluten-free and no
+                                sucralose in the Delicious Strawberry flavor.</li>
+                            <li><em>Notice:</em> Do not use as a sole source of nutrition.</li>
+                            <li><strong>Any-time Formula</strong> - Suitable for consumption before or after exercise,
+                                between meals, with a meal, or any time you need extra protein in your diet.</li>
+                            <li><strong>Most Awarded, Best-Selling Whey Protein Powder</strong> - Top choice worldwide,
+                                tested for banned substances to ensure the highest quality and safety.</li>
+                        </ul>
+                    </td>
+                    <td>$85.99</td>
+                   <td>
+                        <a href="https://www.amazon.com/Optimum-Nutrition-Standard-Protein-Strawberry/dp/B07PBXBGTP/ref=sr_1_5?crid=3NE7L79X8EDTW&dib=eyJ2IjoiMSJ9.61MR35ClPxKWcU4hBromdqn0vBkoaPPqXMWR9-ch9np2Qvnc3mhed56CjrzLD9tEObytmEJjkva3iQFqMa_hzL-tbu2SPf-TJiwnl27OW_CuHIajl_NFEBdRuiXbn2U9P1d513k3T5_hO2hkLW2L-bGU9hAXFO2IpV6pfSvF3LniL0Y9PSgd4S29PjlAnBaZ7fLsNVkHNz0JZeqis5LUnLc-DYXxCoh9MUyd5MLc5odD047O8HlX5t1uLyKoJLuQFCDJdidAvhVZIVO8UFeJ5XRdk6uZq-qwYKgbzHYgWDE.H-FCgllKGPJd-IfkSl-WJSHlgYKmQANWMWs-pJ34hTQ&dib_tag=se&keywords=whey+protein+powderstrawberry&qid=1731456422&rdc=1&sprefix=whey+protein+powdertrawberry%2Caps%2C109&sr=8-5"
+                            class="btn btn-success" target="_blank">
+                            Buy Now
+                        </a>
+                    </td>
                 </tr>
-                <!-- Idea for protein powder -->
+
+                <!-- Product 2: Orgain Protein Powder -->
                 <tr>
-                    <td> alt="Protein Powder" class="product-image"</td> <!-- find photo to make this work <img src="/ProjectRepository/ProjectSourceCode/resources/images/protein-powder.jpg" -->
-                    <td>Protein Powder</td>
-                    <td>High-quality protein powder for muscle growth and recovery.</td>
-                    <td>$25.00</td>
-                    <td><button class="btn btn-add-to-cart" data-id="protein-powder">Add to Cart</button></td>
+                    <td class="text-center">
+                        <img src="https://target.scene7.com/is/image/Target/GUEST_9ac3a542-4a89-43af-9628-2c84296ff981?wid=488&hei=488&fmt=pjpeg"
+                            class="img-fluid rounded" alt="Orgain Protein" width="150" height="150">
+                    </td>
+                    <td>Orgain Organic Vegan Plant Based Protein Powder - Vanilla Bean - 16.32oz</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Orgain</li>
+                            <li><strong>Flavor:</strong> Vanilla Bean</li>
+                            <li><strong>Servings per Container:</strong> Varies</li>
+                            <li><strong>Item Weight:</strong> Not specified</li>
+                            <li><strong>Material Type Free:</strong> No GMOs, soy, gluten, dairy, artificial colors,
+                                flavors, sweeteners, or preservatives</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li><strong>CLEANER INGREDIENTS</strong> - 21g plant protein and less than 1g sugar per
+                                serving. Contains organic peas, brown rice, mung bean, and chia seeds for a complete
+                                protein with all nine essential amino acids. Includes 4g of prebiotics and fiber for gut
+                                support.</li>
+                            <li><strong>HIGHER STANDARDS</strong> - Made without GMOs, carrageenan, soy, gluten, dairy,
+                                artificial colors, flavors, sweeteners, or preservatives.</li>
+                            <li><strong>USDA ORGANIC & CERTIFIED PLANT-BASED</strong> - Third-party certified for
+                                high-quality, organic, and plant-based ingredients.</li>
+                            <li><strong>CUSTOMIZABLE</strong> - Can be mixed with water, almond milk, or oat milk, or
+                                blended into smoothies. Great for adding to overnight oats, cookies, brownies, and other
+                                baked goods.</li>
+                            <li><strong>PERFECT FOR ANY LIFESTYLE</strong> - Suitable for anyone looking to maintain a
+                                healthy lifestyle, support workout recovery, increase protein intake, or follow specific
+                                dietary regimens.</li>
+                            <li><strong>#1 PLANT PROTEIN POWDER BRAND</strong> - Recognized as the #1 plant protein
+                                powder brand in the U.S. for quality and satisfaction.</li>
+                        </ul>
+                    </td>
+                    <td>$19.99</td>
+                    <td>
+                        <a href="https://www.target.com/p/orgain-organic-vegan-plant-based-protein-powder-vanilla-bean-16-32oz/-/A-50041960#lnk=sametab"
+                        class="btn btn-success" target="_blank">
+                            Buy Now
+                        </a>
+                    </td>
+                </tr>
+
+                <!-- Product 3: Creatine Monohydrate -->
+                <tr>
+                    <td class="text-center">
+                        <img src="https://m.media-amazon.com/images/I/711TibIXALL.jpg" class="img-fluid rounded"
+                            alt="Creatine" width="150" height="150">
+                    </td>
+                    <td>Optimum Nutrition Micronized Creatine Monohydrate Powder, Unflavored, Keto Friendly, 120
+                        Servings</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Optimum Nutrition</li>
+                            <li><strong>Flavor:</strong> Unflavored</li>
+                            <li><strong>Primary Supplement Type:</strong> Creatine</li>
+                            <li><strong>Unit Count:</strong> 21.12 Ounce</li>
+                            <li><strong>Item Weight:</strong> 600 Grams</li>
+                            <li><strong>Item Dimensions:</strong> 6 x 5 x 4 inches</li>
+                            <li><strong>Special Ingredients:</strong> Creatine</li>
+                            <li><strong>Diet Type:</strong> Keto</li>
+                            <li><strong>Product Benefits:</strong> Muscle Growth</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li>5 grams pure creatine monohydrate per serving</li>
+                            <li>Supports increases in energy, endurance, and recovery</li>
+                            <li>Maximum potency supports muscle size, strength, and power</li>
+                            <li>Supreme absorbency - micronized to get the most out of each dose</li>
+                            <li><strong>Optimum Nutrition</strong> is the World's #1 Sports Nutrition Brand. Banned
+                                substance tested - Highest quality control measures ensure safe consumption.</li>
+                        </ul>
+                    </td>
+                    <td>$40.50</td>
+                    <td>
+                        <a href="https://www.amazon.com/Optimum-Nutrition-Micronized-Monohydrate-Unflavored/dp/B002DYIZEO/ref=sr_1_1?crid=3F27PTKETLEBN&dib=eyJ2IjoiMSJ9.F-wkXaaZcnpZt14vuUCr2K3FIN3MXs9CEc0tsLzvyWf1I87zyA4VzD4UM7K2Hcg2KF-ykHELpn73YaugK_-PzU-Oe6JA9w82uFR5XuAmGTHphvUueCVWyI2ttUdg9LVRzMBpjs4b8S9IbINT7uNE0xSM7WqDPNC6wyYx9pR4Kx05f3oE0tZjHUoYVGJ8DBVu_xbkJr3fUj6XLQ-dyf2D23sB_hU1qIFWAmX09K9timDg9BqsZk535rPqdMEmz7qHM8hDyxh0QskKAwSkwTsAgYKjUE1hER6ocfA-YHjytwU.VE-Ribb7b9_nThPNXXI40x3DuPCXoKjVuHgC__IBpfg&dib_tag=se&keywords=Optimum+Nutrition+Micronized+Creatine+Monohydrate+Powder%2C+Unflavored%2C+Keto+Friendly%2C+120+Servings&qid=1731456718&rdc=1&sprefix=optimum+nutrition+micronized+creatine+monohydrate+powder%2C+unflavored%2C+keto+friendly%2C+120+servings%2Caps%2C174&sr=8-1"
+                        class="btn btn-success" target="_blank">
+                            Buy Now
+                        </a>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </section>
 
+    <section id="equipment" class="container mt-5">
+        <h2>Exercise Equipment</h2>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Purchase</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <img src="https://images.lululemon.com/is/image/lululemon/LU9BZ3S_0001_1?wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
+                            class="img-fluid rounded" alt="Yoga Mat" width="150" height="150">
+                    </td>
+                    <td>The Mat 5mm Made With FSC™ Certified Rubber Wordmark</td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong> Lululemon</li>
+                            <li><strong>Color:</strong> Black</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li>This mat features a natural rubber base with a little extra cushion to give your body
+                                more depth while your mind goes deep.</li>
+                            <li><strong>Product Features:</strong> This mat will have a slight smell that fades over
+                                time (we suggest rolling it out and airing it before use). Note: Color may change over
+                                time.</li>
+                            <li><em>Care Instructions:</em> After use, wipe mat down with a natural cleanser and store
+                                out of direct sunlight.</li>
+                            <li><strong>Materials:</strong>
+                                <ul>
+                                    <li>Top layer absorbs moisture to help you stay grounded in high-sweat practices.
+                                    </li>
+                                    <li>Sustainably sourced and FSC™-certified natural rubber base for cushioning and
+                                        textured grip.</li>
+                                    <li>Contains latex: People with rubber or latex allergies should avoid contact.</li>
+                                    <li>Antimicrobial additive helps prevent mold and mildew.</li>
+                                    <li>Reversible: Use the smooth, grippy side or the cushioned rubber side as needed.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li><strong>Dimensions and Weight:</strong> 66cm x 180cm (26" x 71"), 5mm thick, Weight:
+                                2.38kg (5.24 lbs)</li>
+                        </ul>
+                    </td>
+                    <td>$118</td>
+                    <td>
+                        <a href="https://shop.lululemon.com/p/yoga-mats/The-Mat-5mm-Wordmark/_/prod10990035?color=0001&sz=ONESIZE"
+                            class="btn btn-success" target="_blank">
+                            Buy Now
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
 
-    {{> footer}}
+            </tbody>
+        </table>
+    </section>
 
+
+    <section id="recovery" class="container mt-5">
+        <h2>Recovery & Wellness</h2>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Purchase</th>
+                </tr>
+            </thead>
+            <tbody>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <img src="" class="img-fluid rounded" alt="" width="150" height="150">
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong></li>
+                            <li><strong>Flavor:</strong></li>
+                            <li><strong>Servings per Container:</strong></li>
+                            <li><strong>Item Weight:</strong></li>
+                            <li><strong>Material Type Free:</strong></li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li></li>
+                            <li></li>
+                            <li><strong></strong></li>
+                            <li><strong></strong></li>
+                            <li><em>Notice:</em></li>
+                            <li><strong></strong></li>
+                            <li><strong></strong></li>
+                        </ul>
+                    </td>
+                    <td></td>
+                    <a href=>
+                        <td><button class="btn btn-success">Buy Now</button></td>
+                    </a>
+                </tr>
+            </tbody>
+
+            </tbody>
+        </table>
+    </section>
+
+    <section id="lifestyle" class="container mt-5">
+        <h2>Lifestyle & Meal Prep</h2>
+        <table class="table table-striped table-hover align-middle">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Product Image</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Purchase</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">
+                        <img src="" class="img-fluid rounded" alt="" width="150" height="150">
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul class="list-unstyled">
+                            <li><strong>Brand:</strong></li>
+                            <li><strong>Flavor:</strong></li>
+                            <li><strong>Servings per Container:</strong></li>
+                            <li><strong>Item Weight:</strong></li>
+                            <li><strong>Material Type Free:</strong></li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li></li>
+                            <li></li>
+                            <li><strong></strong></li>
+                            <li><strong></strong></li>
+                            <li><em>Notice:</em></li>
+                            <li><strong></strong></li>
+                            <li><strong></strong></li>
+                        </ul>
+                    </td>
+                    <td></td>
+                    <td><button class="btn btn-success">Buy Now</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
