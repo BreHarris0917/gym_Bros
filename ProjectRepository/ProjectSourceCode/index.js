@@ -102,11 +102,11 @@ app.post('/register', async (req, res) => {
   const weight = req.body.weight;
   const height_feet = req.body.height_feet;
   const height_inch = req.body.height_inch;
-  const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch, ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
+  const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
   
   bcrypt.hash(password, 10)
   .then(hash => {
-    return db.query(query, [username, hash, email, age, weight, height_feet, height_inch, firstName, lastName]);
+    return db.query(query, [username, hash, firstName, lastName, email, age, weight, height_feet, height_inch ]);
   })
   .then(() => {
     res.redirect('/login');
