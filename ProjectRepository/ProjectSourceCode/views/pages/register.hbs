@@ -55,8 +55,18 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <script>
         //Listen for inputs
+        document.getElementById('feet').addEventListener('input', function() {
+            let feet = parseInt(this.value);
+            if (inches < 0) {
+                this.value = 0; //If the value is less than 0, set it to 0
+            }
+        });
         document.getElementById('inches').addEventListener('input', function() {
             let inches = parseInt(this.value);
             if (inches < 0) {

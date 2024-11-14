@@ -174,6 +174,10 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     {{> footer }}
     <!--Workout timer popup, dynamically starts according to the ID of the workout-->
     <!--Modal specifications:
@@ -289,25 +293,6 @@
             document.getElementById('seconds').innerText = String(timer.seconds).padStart(2, '0');
             document.getElementById('milliseconds').innerText = String(timer.milliseconds).padStart(3, '0'); //Displays 3 digits
         }
-        async function addPoints(points) { //function to add points
-            try {
-                const response = await fetch('/update-points', { //Using post to send points data
-                    method: 'POST', //Http post for sending data to the database
-                    headers: {
-                        'Content-Type': 'application/json' //Content type is set to json
-                    },
-                    body: JSON.stringify({ points }) //Converting points data into json format
-                });
-
-                if (response.ok) { //Check for response
-                    alert(`Congrats! You've earned ${points} points!`); //Send alert notifying user of points
-                } else {
-                    alert('Error updating points. Please try again later.'); //Send alert that something didnt work
-                }
-            } catch (error) {
-                alert('Could not connect to the server. Please try again later.'); //Error during fetch = connection is not working
-            }
-        }
         //Ending workout, also need to calculate the number of calories burnt, workout multiplier x timer
         function endWorkout() {
             clearInterval(timerInterval); //Clear the timer
@@ -328,10 +313,10 @@
             //Resets the timer cuz you're done
             resetTimer();
             //Calculate points: 100 kcal = 1 point
-            const points = Math.floor(caloriesBurned / 100);
+            const points = Math.floor(caloriesBurned / 1);
             if (points > 0) {
                 addPoints(points); //Update points if points are greater than zero
-                //TODO: Add this function ^^^
+                //TODO: Make this POST function!!!! ^^^^
             }
             const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
             workoutModal.hide(); //Closing the modal to open the summary modal
