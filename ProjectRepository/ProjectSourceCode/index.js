@@ -59,6 +59,18 @@ db.connect()
   });
 
 // -------------------------------------  ROUTES   ----------------------------------------------
+
+const user = {
+  username:undefined,
+  password: undefined,
+  firstName: undefined,
+  lastName: undefined,
+  email: undefined,
+  height_feet:undefined,
+  height_inch: undefined,
+  weight: undefined
+};
+
 app.get('/', (req, res) => {
   res.redirect('/home');
 });
@@ -66,6 +78,17 @@ app.get('/', (req, res) => {
 app.get('/home', (req, res) => {
   res.render('pages/home')
 });
+
+/**, {
+    username: req.session.user.username,
+    password: req.session.user.password,
+    firstName: req.session.user.firstName,
+    lastName: req.session.user.lastName,
+    email: req.session.user.email,
+    height_feet: req.session.user.height_feet,
+    height_inch: req.session.user.height_inch,
+    weight: req.session.user.weight
+  }  */
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
@@ -121,7 +144,6 @@ app.post('/login', async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
-  try {
     const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
     if (!user) {
       return res.redirect('/register');
@@ -132,15 +154,36 @@ app.post('/login', async (req, res) => {
       return res.render('pages/login', { message: 'Incorrect username or password.' });
     }
 
-    req.session.user = user;
-    req.session.save(() => {
-      res.redirect('/home');
-    });
-  } catch (error) {
+    db.one(query, values)
+      .then(data => {
+        user.username = username;
+        user.password = data.password;
+        user.firstName = data.firstName;
+        user.lastName = data.lastName;
+        user.email = data.email;
+        user.weight = data.weight;
+        user.height_feet = data.height_feet;
+        user.height_inch = data.height_inch;
+
+        req.session.user = user;
+        req.session.save();
+
+          res.redirect('/home');
+        })
+   .catch (error => {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
-  }
+   });
 });
+
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/login')
+  }
+  next();
+};
+
+app.use(auth);
 
 app.get('/home', (req, res) => {
   res.render('pages/home');
