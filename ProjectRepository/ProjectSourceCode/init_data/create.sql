@@ -5,11 +5,22 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(100) NOT NULL,
     age INT CHECK (age > 0),
     weight FLOAT CHECK (weight > 0),
-    height FLOAT CHECK (height > 0),
-    fitness_points INT DEFAULT 0
+    height_feet CHECK (height_feet > 0),
+    height_inch CHECK (height_inch > 0),
+    fitness_points INT DEFAULT 0,
+    firstname VARCHAR(100), 
+    lastname VARCHAR(100), 
 );
 
-
+/*
+The fitness table is meant to contain all the fitness records of users. 
+*/
+CREATE TABLE IF NOT EXISTS fitness(
+    fitness_id SERIAL PRIMARY KEY ,
+    description VARCHAR(255),
+    workout_time TIME,
+    calories_burned INT CHECK(calories_burned >= 0)
+);
 /*
 This table connects users to all their fitness information
 */
@@ -24,14 +35,6 @@ CREATE TABLE IF NOT EXISTS usersToFitness(
 
 
 
-/*
-The fitness table is meant to contain all the fitness records of users. 
-*/
-CREATE TABLE IF NOT EXISTS fitness(
-    fitness_id SERIAL PRIMARY KEY ,
-    description VARCHAR(255),
-    workout_time TIME,
-    calories_burned INT CHECK(calories_burned >= 0)
-);
+
 
 
