@@ -47,6 +47,7 @@ const dbConfig = {
 };
 const db = pgp(dbConfig);
 
+
 // db test
 db.connect()
   .then((obj) => {
@@ -56,7 +57,6 @@ db.connect()
   .catch((error) => {
     console.log('ERROR:', error.message || error);
   });
-
 // -------------------------------------  ROUTES   ----------------------------------------------
 app.get('/', (req, res) => {
   res.redirect('/login');
@@ -95,8 +95,74 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Starting the server
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+// -------------------------------------  START THE SERVER   ----------------------------------------------
+// Conditionally start the server only if this file is run directly
+
+// module.exports = { app, db }; // Export both app and db for testing
+
+
+//lab 11 API route
+app.get('/welcome', (req, res) => {
+  res.json({ status: 'success', message: 'Welcome!' });
 });
+
+// In your server code (e.g., index.js)
+
+app.get('/status', (req, res) => {
+  res.status(200).json({ status: 'success', message: 'Server is up and running' });
+});
+
+app.post('/data', (req, res) => {
+  const { name, age } = req.body;
+  res.status(201).json({ status: 'success', message: 'Data received', data: { name, age } });
+});
+
+// Register route for user registration
+app.post('/register', async (req, res) => {
+  const { username, password, firstName, lastName } = req.body;
+
+  // Check if required fields are missing or invalid
+  if (!username || typeof username !== 'string' || !password || typeof password !== 'string') {
+    return res.status(400).json({ message: 'Invalid input' });
+  }
+
+  try {
+    const hashedPassword = await bcrypt.hash(password, 10);
+    await db.none('INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4)', [
+      username,
+      hashedPassword,
+      firstName,
+      lastName,
+    ]);
+    res.status(200).json({ message: 'Success' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Error registering user' });
+  }
+});
+
+app.get('/test', (req, res) => {
+  console.log('this function is getting called');
+  res.redirect(302, '/login');
+
+});
+
+/************ Part C **************/
+// Authentication Required
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+      return res.status(401).render('pages/register')
+      //res.redirect(401, '/register');
+  }
+  next()
+}
+app.use(auth);
+
+app.get('/fitness', (req, res) => {
+  console.log('in fitness')
+  res.status(200).render('pages/fitness')
+});
+
+
+const server = app.listen(3000)
+module.exports = {server, db}
