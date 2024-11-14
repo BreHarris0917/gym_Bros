@@ -91,6 +91,10 @@ app.get('/checkout', (req, res) => {
   res.render('pages/checkout')
 });
 
+app.get('/aboutus', (req, res) => {
+  res.render('pages/aboutus')
+});
+
 app.post('/register', async (req, res) => {
   //hash the password using bcrypt library
   const username = req.body.username;
