@@ -68,7 +68,8 @@ const user = {
   email: undefined,
   height_feet:undefined,
   height_inch: undefined,
-  weight: undefined
+  weight: undefined,
+  age: undefined
 };
 
 app.get('/', (req, res) => {
@@ -76,10 +77,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home')
-});
 
-/**, {
+  if(!req.session.user){
+    return res.redirect('/login');
+  }
+
+  console.log('User session data:', req.session.user);
+
+  res.render('pages/home',  {
     username: req.session.user.username,
     password: req.session.user.password,
     firstName: req.session.user.firstName,
@@ -87,8 +92,11 @@ app.get('/home', (req, res) => {
     email: req.session.user.email,
     height_feet: req.session.user.height_feet,
     height_inch: req.session.user.height_inch,
-    weight: req.session.user.weight
-  }  */
+    weight: req.session.user.weight,
+    age: req.session.user.age
+  });
+});
+
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
@@ -132,7 +140,20 @@ app.post('/register', async (req, res) => {
     return db.query(query, [username, hash, firstName, lastName, email, age, weight, height_feet, height_inch ]);
   })
   .then(() => {
-    res.redirect('/login');
+    req.session.user = {
+      username: username,
+      password: password,
+      firstName: firstName, 
+      lastName: lastName,    
+      email: email,
+      age: age,
+      weight: weight,
+      height_feet: height_feet,
+      height_inch: height_inch
+    };
+    req.session.save(() => {
+      res.redirect('/home');
+    });
   })
   .catch(error => {
     console.error(error);
@@ -144,6 +165,7 @@ app.post('/login', async (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
+  try {
     const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
     if (!user) {
       return res.redirect('/register');
@@ -154,27 +176,29 @@ app.post('/login', async (req, res) => {
       return res.render('pages/login', { message: 'Incorrect username or password.' });
     }
 
-    db.one(query, values)
-      .then(data => {
-        user.username = username;
-        user.password = data.password;
-        user.firstName = data.firstName;
-        user.lastName = data.lastName;
-        user.email = data.email;
-        user.weight = data.weight;
-        user.height_feet = data.height_feet;
-        user.height_inch = data.height_inch;
 
-        req.session.user = user;
-        req.session.save();
+    req.session.user = {
+      username: user.username,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      weight: user.weight,
+      height_feet: user.height_feet,
+      height_inch: user.height_inch,
+      age: user.age
+    };
 
-          res.redirect('/home');
-        })
-   .catch (error => {
+        req.session.save(() => {
+        res.redirect('/home');
+      });
+
+  } catch (error) {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
-   });
+  }
 });
+   
 
 const auth = (req, res, next) => {
   if (!req.session.user) {
