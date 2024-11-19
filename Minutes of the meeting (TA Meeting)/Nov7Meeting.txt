@@ -1,3 +1,6 @@
+TA meeting 2
+November 7th 
+
 feedback:
 api optional 
 bring down the load for the coding

@@ -59,13 +59,44 @@ db.connect()
   });
 
 // -------------------------------------  ROUTES   ----------------------------------------------
+
+const user = {
+  username:undefined,
+  password: undefined,
+  firstName: undefined,
+  lastName: undefined,
+  email: undefined,
+  height_feet:undefined,
+  height_inch: undefined,
+  weight: undefined,
+  age: undefined
+};
+
 app.get('/', (req, res) => {
   res.redirect('/home');
 });
 
 app.get('/home', (req, res) => {
-  res.render('pages/home')
+
+  if(!req.session.user){
+    return res.redirect('/login');
+  }
+
+  console.log('User session data:', req.session.user);
+
+  res.render('pages/home',  {
+    username: req.session.user.username,
+    password: req.session.user.password,
+    firstName: req.session.user.firstName,
+    lastName: req.session.user.lastName,
+    email: req.session.user.email,
+    height_feet: req.session.user.height_feet,
+    height_inch: req.session.user.height_inch,
+    weight: req.session.user.weight,
+    age: req.session.user.age
+  });
 });
+
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
@@ -91,22 +122,42 @@ app.get('/checkout', (req, res) => {
   res.render('pages/checkout')
 });
 
+app.get('/aboutus', (req, res) => {
+  res.render('pages/aboutus')
+});
+
 app.post('/register', async (req, res) => {
   //hash the password using bcrypt library
   const username = req.body.username;
   const password = req.body.password;
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
   const email = req.body.email;
   const age = req.body.age;
   const weight = req.body.weight;
-  const height = req.body.height;
-  const query = 'INSERT INTO users (username, password, email, age, weight, height) VALUES ($1, $2, $3, $4, $5, $6);';
+  const height_feet = req.body.height_feet;
+  const height_inch = req.body.height_inch;
+  const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
   
   bcrypt.hash(password, 10)
   .then(hash => {
-    return db.query(query, [username, hash, email, age, weight, height]);
+    return db.query(query, [username, hash, firstName, lastName, email, age, weight, height_feet, height_inch ]);
   })
   .then(() => {
-    res.redirect('/login');
+    req.session.user = {
+      username: username,
+      password: password,
+      firstName: firstName, 
+      lastName: lastName,    
+      email: email,
+      age: age,
+      weight: weight,
+      height_feet: height_feet,
+      height_inch: height_inch
+    };
+    req.session.save(() => {
+      res.redirect('/home');
+    });
   })
   .catch(error => {
     console.error(error);
@@ -129,15 +180,38 @@ app.post('/login', async (req, res) => {
       return res.render('pages/login', { message: 'Incorrect username or password.' });
     }
 
-    req.session.user = user;
-    req.session.save(() => {
-      res.redirect('/home');
-    });
+
+    req.session.user = {
+      username: user.username,
+      password: user.password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      weight: user.weight,
+      height_feet: user.height_feet,
+      height_inch: user.height_inch,
+      age: user.age
+    };
+
+        req.session.save(() => {
+        res.redirect('/home');
+      });
+
   } catch (error) {
     console.error(error);
     res.render('pages/login', { message: 'An error occurred during login.' });
   }
 });
+   
+
+const auth = (req, res, next) => {
+  if (!req.session.user) {
+    return res.redirect('/login')
+  }
+  next();
+};
+
+app.use(auth);
 
 app.get('/home', (req, res) => {
   res.render('pages/home');

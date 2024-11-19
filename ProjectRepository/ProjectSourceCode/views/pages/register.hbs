@@ -15,12 +15,12 @@
                     <h2 class="text-center mb-4">Register</h2>
                     <form method="post" action="/register"> <!--POST route-->
                         <div class="mb-3">
-                            <label for="first_name" class="form-label">First Name</label>
-                            <input type="text" id="first_name" name="first_name" class="form-control" placeholder="Enter your first name" required>
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" name="firstName" class="form-control" placeholder="Enter your first name" required>
                         </div>
                         <div class="mb-3">
-                            <label for="last_name" class="form-label">Last Name</label>
-                            <input type="text" id="last_name" name="last_name" class="form-control" placeholder="Enter your last name" required>
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" name="lastName" class="form-control" placeholder="Enter your last name" required>
                         </div>
                         <div class="mb-3">
                             <label for="age" class="form-label">Age</label>
@@ -33,11 +33,15 @@
                         <div class="mb-3 row">
                             <label class="form-label">Height</label>
                             <div class="col-6"> <!--Feet input-->
-                                <input type="number" id="feet" name="heightFeet" class="form-control" placeholder="Feet" required>
+                                <input type="number" id="feet" name="height_feet" class="form-control" placeholder="Feet" required>
                             </div>
                             <div class="col-6"> <!--Inches input-->
-                                <input type="number" id="inches" name="heightInches" class="form-control" placeholder="Inches" required>
+                                <input type="number" id="inches" name="height_inch" class="form-control" placeholder="Inches" required>
                             </div>
+                        </div>
+                         <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" id="email" name="email" class="form-control" placeholder="Enter your email" required>
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
@@ -55,8 +59,18 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
     <script>
         //Listen for inputs
+        document.getElementById('feet').addEventListener('input', function() {
+            let feet = parseInt(this.value);
+            if (inches < 0) {
+                this.value = 0; //If the value is less than 0, set it to 0
+            }
+        });
         document.getElementById('inches').addEventListener('input', function() {
             let inches = parseInt(this.value);
             if (inches < 0) {
