@@ -1,5 +1,5 @@
-# gym_Bros
-Group project for Software Development Methods CSCI 3308
+# Gym Bros (fitness tracker)
+--*Group project for Software Development Methods CSCI 3308*--
 
 ## Project Expectations
 This will be a fitness tracking, The goals of this project will be to create an in app store, profiles, friending other people and possibly a map feature. 
