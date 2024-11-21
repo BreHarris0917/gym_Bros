@@ -1,0 +1,3 @@
+able to get login page that links to a register page
+workout page framework complete 
+basic nav bar framework complete
