@@ -50,10 +50,17 @@
                         <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#lifestyle"
                             style="transition: all 0.3s;">Lifestyle & Meal Prep</a>
                     </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-dark fw-semibold px-3 py-1 rounded" href="#suggestions"
+                            style="transition: all 0.3s;">Can't find a product you're looking for?</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
+    <div class="container my-4">
+        <input type="text" id="search-bar" class="form-control" placeholder="Search for possible products...">
+    </div>
 
     <!-- Supplements and Nutrition
     1. Supplements & Nutrition
@@ -77,7 +84,7 @@
             </thead>
             <tbody>
                 <!-- Product 1: Whey Protein Powder -->
-                <tr>
+                <tr id="product-1">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/81aEbH-WUYL._AC_UF1000,1000_QL80_.jpg"
                             class="img-fluid rounded" alt="Whey Protein" width="150" height="150">
@@ -117,7 +124,7 @@
                     </td>
                 </tr>
                 <!-- Product 2: Orgain Protein Powder -->
-                <tr>
+                <tr id="product-2">
                     <td class="text-center">
                         <img src="https://target.scene7.com/is/image/Target/GUEST_9ac3a542-4a89-43af-9628-2c84296ff981?wid=488&hei=488&fmt=pjpeg"
                             class="img-fluid rounded" alt="Orgain Protein" width="150" height="150">
@@ -161,7 +168,7 @@
                     </td>
                 </tr>
                 <!-- Product 3: Creatine Monohydrate -->
-                <tr>
+                <tr id="product-3">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/711TibIXALL.jpg" class="img-fluid rounded"
                             alt="Creatine" width="150" height="150">
@@ -199,7 +206,7 @@
                     </td>
                 </tr>
                 <!-- Product4: Vital Protein Collagen -->
-                <tr>
+                <t id="product-4">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/71kHWf4GWqL._AC_SL1500_.jpg"
                             class="img-fluid rounded" alt="vital proteins" width="150" height="150">
@@ -236,7 +243,7 @@
                             Buy Now
                         </a>
                     </td>
-                </tr>
+                    </tr>
             </tbody>
         </table>
     </section>
@@ -266,7 +273,7 @@
             <tbody>
 
                 <!-- Product 1: yoga mat-->
-                <tr>
+                <tr id="product-2.1">
                     <td class="text-center">
                         <img src="https://images.lululemon.com/is/image/lululemon/LU9BZ3S_0001_1?wid=1600&op_usm=0.5,2,10,0&fmt=webp&qlt=80,1&fit=constrain,0&op_sharpen=0&resMode=sharp2&iccEmbed=0&printRes=72"
                             class="img-fluid rounded" alt="Yoga Mat" width="150" height="150">
@@ -312,7 +319,7 @@
                 </tr>
 
                 <!--  Product 2: resitance bands -->
-                <tr>
+                <tr id="product-2.2">
                     <td class="text-center">
                         <img src="https://target.scene7.com/is/image/Target/GUEST_eccbc314-2813-4abc-bc0e-a18f4752813f?wid=1200&hei=1200&qlt=80&fmt=pjpeg"
                             class="img-fluid rounded" alt="resistance bands" width="150" height="150">
@@ -342,7 +349,7 @@
                 </tr>
 
                 <!-- Product 3: dumbell set -->
-                <tr>
+                <tr id="product-2.3">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/61QjAKgqSHL._AC_SL1500_.jpg"
                             class="img-fluid rounded" alt="dumbell set" width="150" height="150">
@@ -382,7 +389,7 @@
                 </tr>
 
                 <!--Product 4: jump ropes -->
-                <tr>
+                <tr id="product-2.4">
                     <td class="text-center">
                         <img src="https://elitejumps.co/cdn/shop/products/fit-rope-long-8-handle-freestyle-4mm-pvc-elite-jumps-517505.jpg?v=1698858394&width=1280"
                             class="img-fluid rounded" alt="jump rope" width="150" height="150">
@@ -446,116 +453,145 @@
             </thead>
             <tbody>
                 <!-- Product 1: massage gun  -->
-                <tr>
-                   <td class="text-center">
-                        <img src="https://www.therabody.com/dw/image/v2/BCWX_PRD/on/demandware.static/-/Sites-thg-master/default/dw2e4c514a/images/PDP/Relief/Relief-PDP-Hero-1-Navy.jpg?sw=1200" class="img-fluid rounded" alt="" width="150" height="150">
+                <t id="product-3.1" r>
+                    <td class="text-center">
+                        <img src="https://www.therabody.com/dw/image/v2/BCWX_PRD/on/demandware.static/-/Sites-thg-master/default/dw2e4c514a/images/PDP/Relief/Relief-PDP-Hero-1-Navy.jpg?sw=1200"
+                            class="img-fluid rounded" alt="" width="150" height="150">
                     </td>
-                    <td></td>
+                    <td>Theragun Relief</td>
                     <td>
                         <ul class="list-unstyled">
-                            <li><strong>Brand:</strong></li>
-                            <li><strong>Flavor:</strong></li>
-                            <li><strong>Servings per Container:</strong></li>
-                            <li><strong>Item Weight:</strong></li>
-                            <li><strong>Material Type Free:</strong></li>
+                            <li><strong>Brand:</strong> Therabody</li>
+                            <li><strong>Product Name:</strong> Theragun Relief</li>
+                            <li><strong>Color:</strong> Navy</li>
+                            <li><strong>Price:</strong> $149</li>
                         </ul>
                         <strong>About this item:</strong>
                         <ul class="list-unstyled">
-                            <li></li>
-                            <li><strong></strong></li>
+                            <li>Comfortable and lightweight design for everyday use.</li>
+                            <li>Provides fast and effective relief from aches, pains, tension, and stiffness.</li>
+                            <li>Features scientifically proven percussive massage therapy.</li>
+                            <li>Equipped with a patented triangle grip for easy access to hard-to-reach areas.</li>
+                            <li>Includes three specialized attachments: Dampener, Standard Ball, and Thumb.</li>
                         </ul>
                     </td>
-                    <td> </td>
+                    <td>$149</td>
                     <td>
-                        <a href="https://www.therabody.com/us/en-us/theragun-relief-navy.html?redirect=false&utm_a=&gad_source=1&gbraid=0AAAAADMCicren9lCrIox2N14XVnkC776A&gclid=EAIaIQobChMIgMvS2-fciQMVHwetBh0bPRcOEAQYBSABEgKnSPD_BwE" class="btn btn-success" target="_blank">
+                        <a href="https://www.therabody.com/us/en-us/theragun-relief-navy.html?redirect=false&utm_a=&gad_source=1&gbraid=0AAAAADMCicren9lCrIox2N14XVnkC776A&gclid=EAIaIQobChMIgMvS2-fciQMVHwetBh0bPRcOEAQYBSABEgKnSPD_BwE"
+                            class="btn btn-success" target="_blank">
                             Buy Now
                         </a>
                     </td>
-                </tr>
-                <!-- Product 2: hot and cold gel pack -->
-                <tr>
-                    <td class="text-center">
-                        <img src="https://pics.walgreens.com/prodimg/629348/100.jpg" class="img-fluid rounded" alt="" width="150" height="150">
-                    </td>
-                    <td></td>
-                    <td>
-                        <ul class="list-unstyled">
-                            <li><strong>Brand:</strong></li>
-                            <li><strong>Flavor:</strong></li>
-                            <li><strong>Servings per Container:</strong></li>
-                            <li><strong>Item Weight:</strong></li>
-                            <li><strong>Material Type Free:</strong></li>
-                        </ul>
-                        <strong>About this item:</strong>
-                        <ul class="list-unstyled">
-                            <li></li>
-                            <li><strong></strong></li>
-                        </ul>
-                    </td>
-                    <td> </td>
-                    <td>
-                        <a href="https://www.walgreens.com/store/c/walgreens-gel-pad-large/ID=300408340-product" class="btn btn-success" target="_blank">
-                            Buy Now
-                        </a>
-                    </td>
-                </tr>
-                <!-- Product 3: AmazonBasics High-Density Foam Roller -->
-                <tr>
-                    <td class="text-center">
-                        <img src="https://m.media-amazon.com/images/I/71xDzRJuq-L._AC_SL1500_.jpg"
-                            class="img-fluid rounded" alt="AmazonBasics Foam Roller" width="150" height="150">
-                    </td>
-                    <td>AmazonBasics High-Density Foam Roller</td>
-                    <td>
-                        <ul class="list-unstyled">
-    <li><strong>Brand:</strong> Nicewell</li>
-    <li><strong>Color:</strong> Ash Silver</li>
-    <li><strong>Recommended Uses:</strong> Food</li>
-    <li><strong>Special Features:</strong> Large Display, Backlit Display, Lightweight, High Weight Capacity, Tare Function</li>
-    <li><strong>Display Type:</strong> LCD</li>
-</ul>
-<strong>About this item:</strong>
-<ul class="list-unstyled">
-    <li>PRECISE WEIGHT: Built-in four high-precision load sensors provide quick, accurate measurements in 1g or 0.1oz increments, with a range from 0.1oz to 22 lbs (3g to 10kg).</li>
-    <li>MULTIFUNCTION LARGE SCALE: 9"x6.3" platform and large LCD display with readings in g, kg, lb:oz, fl.oz, and ml. Ideal for cooking, baking, tracking intake, and weight loss.</li>
-    <li>PRACTICAL DESIGN: Tempered glass with sleek stainless steel top for durability and easy cleaning; includes a hook for convenient storage. Protective blue film included to prevent scratches during shipping.</li>
-    <li>EASY TARE / ZERO OUT: Tare function allows for accurate readouts by subtracting the weight of containers or plates.</li>
-    <li>GREAT SUPPORT: Includes 2 AAA batteries, with customer support available for any issues.</li>
-</ul>
-                    </td>
-                    <td>$9.99</td>
-                    <td>
-                        <a href="https://www.amazon.com/AmazonBasics-High-Density-Round-Foam-Roller/dp/B00XM2MRGI"
-                            class="btn btn-success" target="_blank">Buy Now</a>
-                    </td>
-                </tr>
-                <!-- Product 4:stretching tool -->
-                <tr>
-                    <td class="text-center">
-                        <img src="https://i5.walmartimages.com/seo/The-Original-Stretch-Out-Strap-Exercise-Book-Top-Choice-Straps-Physical-Therapy-Yoga-Stretching-Knee-Therapy-OPTP_fe615bf5-7fce-4c0b-9a09-e445c1b5f80e.5364af7778d6a42d966bbb9135b43b72.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF" class="img-fluid rounded" alt="" width="150" height="150">
-                    </td>
-                    <td></td>
-                    <td>
-                        <ul class="list-unstyled">
-                            <li><strong>Brand:</strong></li>
-                            <li><strong>Flavor:</strong></li>
-                            <li><strong>Servings per Container:</strong></li>
-                            <li><strong>Item Weight:</strong></li>
-                            <li><strong>Material Type Free:</strong></li>
-                        </ul>
-                        <strong>About this item:</strong>
-                        <ul class="list-unstyled">
-                            <li></li>
-                            <li><strong></strong></li>
-                        </ul>
-                    </td>
-                    <td> </td>
-                    <td>
-                        <a href="https://business.walmart.com/ip/The-Original-Stretch-Out-Strap-Exercise-Book-Top-Choice-Straps-Physical-Therapy-Yoga-Stretching-Knee-Therapy-OPTP/121169963" class="btn btn-success" target="_blank">
-                            Buy Now
-                        </a>
-                    </td>
-                </tr>
+                    </tr>
+                    <!-- Product 2: hot and cold gel pack -->
+                    <tr id="product-3.2">
+                        <td class="text-center">
+                            <img src="https://pics.walgreens.com/prodimg/629348/100.jpg" class="img-fluid rounded"
+                                alt="" width="150" height="150">
+                        </td>
+                        <td>Walgreens Gel Pad Large, 1.0 ea</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li><strong>Brand:</strong> Walgreens</li>
+                                <li><strong>Product Name:</strong> Gel Pad Large</li>
+                                <li><strong>Dimensions:</strong> 11.81 in x 7.87 in (30 cm x 20 cm)</li>
+                                <li><strong>Usage:</strong> Reusable for hot and cold therapy</li>
+                            </ul>
+                            <strong>About this item:</strong>
+                            <ul class="list-unstyled">
+                                <li>Provides heat therapy for stiff joints, sore muscles, and cramps.</li>
+                                <li>Offers cold therapy for sprains, bumps, bruises, inflammation, and swelling.</li>
+                                <li>Maintains flexibility and form when hot or cold.</li>
+                                <li>Direct-to-skin application for targeted relief.</li>
+                            </ul>
+                        </td>
+                        <td>$17.99</td>
+                        <td>
+                            <a href="https://www.walgreens.com/store/c/walgreens-gel-pad-large/ID=300408340-product"
+                                class="btn btn-success" target="_blank">
+                                Buy Now
+                            </a>
+                        </td>
+                    </tr>
+                    <!-- Product 3: AmazonBasics High-Density Foam Roller -->
+                    <tr id="product-3.3">
+                        <td class="text-center">
+                            <img src="https://m.media-amazon.com/images/I/71xDzRJuq-L._AC_SL1500_.jpg"
+                                class="img-fluid rounded" alt="AmazonBasics Foam Roller" width="150" height="150">
+                        </td>
+                        <td>AmazonBasics High-Density Foam Roller</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li><strong>Brand:</strong> Nicewell</li>
+                                <li><strong>Color:</strong> Ash Silver</li>
+                                <li><strong>Recommended Uses:</strong> Food</li>
+                                <li><strong>Special Features:</strong> Large Display, Backlit Display, Lightweight, High
+                                    Weight Capacity, Tare Function</li>
+                                <li><strong>Display Type:</strong> LCD</li>
+                            </ul>
+                            <strong>About this item:</strong>
+                            <ul class="list-unstyled">
+                                <li>PRECISE WEIGHT: Built-in four high-precision load sensors provide quick, accurate
+                                    measurements in 1g or 0.1oz increments, with a range from 0.1oz to 22 lbs (3g to
+                                    10kg).
+                                </li>
+                                <li>MULTIFUNCTION LARGE SCALE: 9"x6.3" platform and large LCD display with readings in
+                                    g,
+                                    kg, lb:oz, fl.oz, and ml. Ideal for cooking, baking, tracking intake, and weight
+                                    loss.
+                                </li>
+                                <li>PRACTICAL DESIGN: Tempered glass with sleek stainless steel top for durability and
+                                    easy
+                                    cleaning; includes a hook for convenient storage. Protective blue film included to
+                                    prevent scratches during shipping.</li>
+                                <li>EASY TARE / ZERO OUT: Tare function allows for accurate readouts by subtracting the
+                                    weight of containers or plates.</li>
+                                <li>GREAT SUPPORT: Includes 2 AAA batteries, with customer support available for any
+                                    issues.
+                                </li>
+                            </ul>
+                        </td>
+                        <td>$9.99</td>
+                        <td>
+                            <a href="https://www.amazon.com/AmazonBasics-High-Density-Round-Foam-Roller/dp/B00XM2MRGI"
+                                class="btn btn-success" target="_blank">Buy Now</a>
+                        </td>
+                    </tr>
+                    <!-- Product 4:stretching tool -->
+                    <t id="product-3.4" r>
+                        <td class="text-center">
+                            <img src="https://i5.walmartimages.com/seo/The-Original-Stretch-Out-Strap-Exercise-Book-Top-Choice-Straps-Physical-Therapy-Yoga-Stretching-Knee-Therapy-OPTP_fe615bf5-7fce-4c0b-9a09-e445c1b5f80e.5364af7778d6a42d966bbb9135b43b72.jpeg?odnHeight=612&odnWidth=612&odnBg=FFFFFF"
+                                class="img-fluid rounded" alt="" width="150" height="150">
+                        </td>
+                        <td>The Original Stretch Out Strap with Exercise Book, Top Choice Stretch Out Straps for
+                            Physical
+                            Therapy, Yoga Stretching Strap or Knee Therapy Strap by OPTP</td>
+                        <td>
+                            <ul class="list-unstyled">
+                                <li><strong>Brand:</strong> OPTP</li>
+                                <li><strong>Product Name:</strong> The Original Stretch Out Strap with Exercise Book
+                                </li>
+                                <li><strong>Material:</strong> Durable woven nylon</li>
+                                <li><strong>Length:</strong> Approximately 6 feet 4 inches</li>
+                                <li><strong>Color:</strong> Green</li>
+                            </ul>
+                            <strong>About this item:</strong>
+                            <ul class="list-unstyled">
+                                <li>Includes a comprehensive exercise book with detailed instructions and color photos.
+                                </li>
+                                <li>Features multiple loops for deep, gradual stretching of major muscle groups.</li>
+                                <li>Ideal for physical therapy, yoga, and general stretching routines.</li>
+                                <li>Assists in improving flexibility, range of motion, and overall fitness.</li>
+                            </ul>
+                        </td>
+                        <td>$15.95 </td>
+                        <td>
+                            <a href="https://business.walmart.com/ip/The-Original-Stretch-Out-Strap-Exercise-Book-Top-Choice-Straps-Physical-Therapy-Yoga-Stretching-Knee-Therapy-OPTP/121169963"
+                                class="btn btn-success" target="_blank">
+                                Buy Now
+                            </a>
+                        </td>
+                        </tr>
             </tbody>
         </table>
     </section>
@@ -578,7 +614,7 @@
             </thead>
             <tbody>
                 <!--Product 1:Rubbermaid EasyFindLids Food Storage Containers -->
-                <tr>
+                <tr id="product-4.1">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/71Aq23avHIL._AC_SL1500_.jpg"
                             class="img-fluid rounded" alt="Rubbermaid Brilliance Containers" width="150" height="150">
@@ -593,10 +629,14 @@
                         </ul>
                         <strong>About this item:</strong>
                         <ul class="list-unstyled">
-                            <li>Created by the home design experts at Rubbermaid, this limited-edition Insignia Blue color adds a touch of modern style to any kitchen.</li>
-                            <li>Modular and stackable, the EasyFindLids food storage system is designed to make clutter a thing of the past.</li>
-                            <li>Snap lids to other lids or bases and nest them all together to free up valuable kitchen space.</li>
-                            <li>Vented lid on medium-sized containers reduces microwave splatter and safely allows steam to escape.</li>
+                            <li>Created by the home design experts at Rubbermaid, this limited-edition Insignia Blue
+                                color adds a touch of modern style to any kitchen.</li>
+                            <li>Modular and stackable, the EasyFindLids food storage system is designed to make clutter
+                                a thing of the past.</li>
+                            <li>Snap lids to other lids or bases and nest them all together to free up valuable kitchen
+                                space.</li>
+                            <li>Vented lid on medium-sized containers reduces microwave splatter and safely allows steam
+                                to escape.</li>
                             <li>Durable and freezer-safe; perfect for saving food for weekday meals in minutes.</li>
                         </ul>
                     </td>
@@ -607,61 +647,66 @@
                     </td>
                 </tr>
                 <!--Product 2: owala -->
-                <tr>
+                <tr id="product-4.2">
                     <td class="text-center">
-                        <img src="https://owala.myshopify.com/cdn/shop/products/Neo_Sage_24oz_SC-4000x4000-c38c18a.png?v=1718293383" class="img-fluid rounded" alt="" width="150" height="150">
+                        <img src="https://owala.myshopify.com/cdn/shop/products/Neo_Sage_24oz_SC-4000x4000-c38c18a.png?v=1718293383"
+                            class="img-fluid rounded" alt="" width="150" height="150">
                     </td>
-                    <td></td>
+                    <td>Owala freesip</td>
                     <td>
                         <ul class="list-unstyled">
-                            <li><strong>Brand:</strong></li>
-                            <li><strong>Flavor:</strong></li>
-                            <li><strong>Servings per Container:</strong></li>
-                            <li><strong>Item Weight:</strong></li>
-                            <li><strong>Material Type Free:</strong></li>
+                            <li><strong>Brand:</strong> OWALA</li>
+                            <li><strong>Item Weight:</strong> 0.8 lbs</li>
+                            <li><strong>Material Type Free:</strong> BPA-Free</li>
                         </ul>
                         <strong>About this item:</strong>
                         <ul class="list-unstyled">
-                            <li></li>
-                            <li><strong></strong></li>
+                            <li>Effortless sipping with a built-in straw and wide-mouth opening.</li>
+                            <li><strong>Features:</strong> Double-wall insulation keeps drinks cold for up to 24 hours.
+                            </li>
                         </ul>
                     </td>
-                    <td> </td>
+                    <td>$27.99 </td>
                     <td>
-                        <a href="https://owalalife.com/products/freesip?variant=43048895283359" class="btn btn-success" target="_blank">
+                        <a href="https://owalalife.com/products/freesip?variant=43048895283359" class="btn btn-success"
+                            target="_blank">
                             Buy Now
                         </a>
                     </td>
                 </tr>
                 <!--Product 3: duffel bag-->
-                <tr>
+                <tr id="product-4.3">
                     <td class="text-center">
-                        <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/ActiveHoldallMediumGSBlackI4A2E-BB2J-0104_3840x.jpg?v=1726485465" class="img-fluid rounded" alt="" width="150" height="150">
+                        <img src="https://cdn.shopify.com/s/files/1/0156/6146/files/ActiveHoldallMediumGSBlackI4A2E-BB2J-0104_3840x.jpg?v=1726485465"
+                            class="img-fluid rounded" alt="" width="150" height="150">
                     </td>
-                    <td></td>
+                    <td>ACTIVE GYM BAG MEDIUM</td>
                     <td>
                         <ul class="list-unstyled">
-                            <li><strong>Brand:</strong></li>
-                            <li><strong>Flavor:</strong></li>
-                            <li><strong>Servings per Container:</strong></li>
-                            <li><strong>Item Weight:</strong></li>
-                            <li><strong>Material Type Free:</strong></li>
+                            <li><strong>Brand:</strong> Gymshark</li>
+                            <li><strong>Color:</strong> Black</li>
+                            <li><strong>Dimensions:</strong> 55cm (L) x 29cm (H) x 26cm (D)</li>
+                            <li><strong>Material:</strong> 100% Polyester</li>
                         </ul>
                         <strong>About this item:</strong>
                         <ul class="list-unstyled">
-                            <li></li>
-                            <li><strong></strong></li>
+                            <li>Spacious main compartment for all your essentials.</li>
+                            <li>Internal pocket for smaller items like phone and keys.</li>
+                            <li>External stretchy mesh slip pocket for additional storage.</li>
+                            <li>External shoe/wet pocket with breathable eyelets to keep things fresh.</li>
+                            <li>Branded silicone front panel.</li>
                         </ul>
                     </td>
-                    <td> </td>
+                    <td>$44 </td>
                     <td>
-                        <a href="https://www.gymshark.com/products/gymshark-active-holdall-medium-black-aw24" class="btn btn-success" target="_blank">
+                        <a href="https://www.gymshark.com/products/gymshark-active-holdall-medium-black-aw24"
+                            class="btn btn-success" target="_blank">
                             Buy Now
                         </a>
                     </td>
                 </tr>
                 <!--Product 4: Nicewell Digital Food Scale -->
-                <tr>
+                <tr id="product-4.4">
                     <td class="text-center">
                         <img src="https://m.media-amazon.com/images/I/61hEtbJv3YL._AC_SL1500_.jpg"
                             class="img-fluid rounded" alt="Nicewell Digital Food Scale" width="150" height="150">
@@ -669,20 +714,29 @@
                     <td>Nicewell Digital Food Scale</td>
                     <td>
                         <ul class="list-unstyled">
-    <li><strong>Brand:</strong> Nicewell</li>
-    <li><strong>Color:</strong> Ash Silver</li>
-    <li><strong>Recommended Uses:</strong> Food</li>
-    <li><strong>Special Features:</strong> Large Display, Backlit Display, Lightweight, High Weight Capacity, Tare Function</li>
-    <li><strong>Display Type:</strong> LCD</li>
-</ul>
-<strong>About this item:</strong>
-<ul class="list-unstyled">
-    <li>PRECISE WEIGHT: Built-in four high-precision load sensors provide quick, accurate measurements in 1g or 0.1oz increments, with a range from 0.1oz to 22 lbs (3g to 10kg).</li>
-    <li>MULTIFUNCTION LARGE SCALE: 9"x6.3" platform and large LCD display with readings in g, kg, lb:oz, fl.oz, and ml. Ideal for cooking, baking, tracking intake, and weight loss.</li>
-    <li>PRACTICAL DESIGN: Tempered glass with sleek stainless steel top for durability and easy cleaning; includes a hook for convenient storage. Protective blue film included to prevent scratches during shipping.</li>
-    <li>EASY TARE / ZERO OUT: Tare function allows for accurate readouts by subtracting the weight of containers or plates.</li>
-    <li>GREAT SUPPORT: Includes 2 AAA batteries, with customer support available for any issues.</li>
-</ul>
+                            <li><strong>Brand:</strong> Nicewell</li>
+                            <li><strong>Color:</strong> Ash Silver</li>
+                            <li><strong>Recommended Uses:</strong> Food</li>
+                            <li><strong>Special Features:</strong> Large Display, Backlit Display, Lightweight, High
+                                Weight Capacity, Tare Function</li>
+                            <li><strong>Display Type:</strong> LCD</li>
+                        </ul>
+                        <strong>About this item:</strong>
+                        <ul class="list-unstyled">
+                            <li>PRECISE WEIGHT: Built-in four high-precision load sensors provide quick, accurate
+                                measurements in 1g or 0.1oz increments, with a range from 0.1oz to 22 lbs (3g to 10kg).
+                            </li>
+                            <li>MULTIFUNCTION LARGE SCALE: 9"x6.3" platform and large LCD display with readings in g,
+                                kg, lb:oz, fl.oz, and ml. Ideal for cooking, baking, tracking intake, and weight loss.
+                            </li>
+                            <li>PRACTICAL DESIGN: Tempered glass with sleek stainless steel top for durability and easy
+                                cleaning; includes a hook for convenient storage. Protective blue film included to
+                                prevent scratches during shipping.</li>
+                            <li>EASY TARE / ZERO OUT: Tare function allows for accurate readouts by subtracting the
+                                weight of containers or plates.</li>
+                            <li>GREAT SUPPORT: Includes 2 AAA batteries, with customer support available for any issues.
+                            </li>
+                        </ul>
                     </td>
                     <td>$22.77</td>
                     <td>
@@ -693,6 +747,7 @@
             </tbody>
         </table>
     </section>
+
     <br>
     <br>
     <br>
@@ -700,6 +755,29 @@
 
     <!-- Bootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Listen for input in the search bar
+        document.getElementById('search-bar').addEventListener('input', function () {
+            const query = this.value.toLowerCase(); // Convert search query to lowercase
+            const rows = document.querySelectorAll('tbody tr'); // Get all product rows
+
+            // Loop through all rows
+            rows.forEach(row => {
+                const productName = row.querySelector('td:nth-child(2)').textContent.toLowerCase(); // Get product name
+                const productDescription = row.querySelector('td:nth-child(3)').textContent.toLowerCase(); // Get product description
+
+                // Check if the search query matches the name or description
+                if (productName.includes(query) || productDescription.includes(query)) {
+                    row.style.display = ''; // Show row if it matches
+                } else {
+                    row.style.display = 'none'; // Hide row if it doesn't match
+                }
+            });
+        });
+    </script>
+
+
 </body>
 
 </html>

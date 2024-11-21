@@ -33,9 +33,3 @@ CREATE TABLE IF NOT EXISTS usersToFitness(
     PRIMARY KEY (user_id, fitness_id)
 );
 
-
-
-
-
-
-
