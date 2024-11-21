@@ -1,5 +1,16 @@
-# Gym Bros (fitness tracker)
+# Gym Bros README
 --*Group project for Software Development Methods CSCI 3308*--
+
+## Aplication description 
+
+
+### Contributors: 
+John 
+Idaly 
+Joanne 
+Nicole
+Joe
+Breanna 
 
 ## Project Expectations
 This will be a fitness tracking, The goals of this project will be to create an in app store, profiles, friending other people and possibly a map feature. 
