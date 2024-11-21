@@ -23,7 +23,6 @@ Add user profile picture
 FEATURES:
 Keep chronological time line of posts, newer posts show up first
 
-<<<<<<< HEAD
 ##### Friending other people
 This feature will allow users to friend other users that are also on the app. 
 =======
