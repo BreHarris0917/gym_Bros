@@ -147,13 +147,13 @@ app.post('/register', async (req, res) => {
     req.session.user = {
       username: username,
       password: password,
-      firstName: firstName, 
-      lastName: lastName,    
+      firstName: firstName,
+      lastName: lastName,
       email: email,
-      age: age,
-      weight: weight,
       height_feet: height_feet,
-      height_inch: height_inch
+      height_inch: height_inch,
+      weight: weight,
+      age: age
     };
     req.session.save(() => {
       res.redirect('/home');
@@ -180,7 +180,6 @@ app.post('/login', async (req, res) => {
       return res.render('pages/login', { message: 'Incorrect username or password.' });
     }
 
-
     req.session.user = {
       username: user.username,
       password: user.password,
@@ -193,9 +192,11 @@ app.post('/login', async (req, res) => {
       age: user.age
     };
 
+
         req.session.save(() => {
         res.redirect('/home');
       });
+
 
   } catch (error) {
     console.error(error);
