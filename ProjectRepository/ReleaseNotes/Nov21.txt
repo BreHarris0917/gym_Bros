@@ -1,0 +1,4 @@
+Shop updated 
+4 items per category that give a basic description 
+items are hyperlinked to where a user can purchase the item 
+search bar added (working)
