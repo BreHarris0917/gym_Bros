@@ -1,0 +1,28 @@
+week 11/11 - 11/18
+
+Updates:
+group made decision that the shop should be select items that link to where to purchase
+    handling money on our end could be difficult
+considering adding a social media aspect
+    a ranking system
+    the # of points a user gets from working out is ranked amongst all other users on the data base
+shop is looking good
+    used bootstrap 
+    removed cart page and checkout page so we dont handle card information anymore
+finishing lab 11 test cases 
+
+Future plans:
+work on class presentation
+wrap up final code pieces
+finish lab 11 by thursday
+use bootstrap to make the pages look prettier
+implement the social media ranking aspect 
+
+Update the status of user stories on the GitHub project board (y/n)?
+y
+Updated GitHub repository with the latest code before meeting (y/n)? 
+y
+Consistent commits during the week (commits on at least 3 days of the week) (y/n)?
+y
+Individual contribution - meaningful commits (y/n)? 
+y
