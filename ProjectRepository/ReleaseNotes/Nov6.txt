@@ -1,0 +1,3 @@
+Successfully able to run the website using docker 
+and able to see the login page.
+pushed to github

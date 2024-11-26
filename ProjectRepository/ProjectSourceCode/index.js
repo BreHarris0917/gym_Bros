@@ -69,11 +69,13 @@ const user = {
   height_feet:undefined,
   height_inch: undefined,
   weight: undefined,
-  age: undefined
+  age: undefined,
+  points: undefined
 };
 
 app.get('/', (req, res) => {
-  res.redirect('/home');
+  const isLoggedIn = req.session && req.session.user; 
+  res.render('/login', {isLoggedIn});
 });
 
 app.get('/home', (req, res) => {
@@ -90,10 +92,11 @@ app.get('/home', (req, res) => {
     height_feet: req.session.user.height_feet,
     height_inch: req.session.user.height_inch,
     weight: req.session.user.weight,
-    age: req.session.user.age
+    age: req.session.user.age,
+    fitness_points: req.session.user.fitness_points,
+    showCheckInPopup: req.session.showCheckInPopup
   });
 });
-
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
@@ -206,10 +209,33 @@ app.post('/login', async (req, res) => {
       weight: Number(user.weight),
       height_feet: Number(user.height_feet),
       height_inch: Number(user.height_inch),
-      age: Number(user.age)
+      age: Number(user.age),
+      fitness_points: Number(user.fitness_points)
     };
 
      req.session.save(() => {
+      res.redirect('/home');
+    });
+
+    // Check if the user has checked in today
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
+
+    if (user.last_checkin !== currentDate) {
+      // User has not checked in today, show the popup and update fitness points
+      req.session.showCheckInPopup = true;
+      
+      // Update fitness points and last check-in date
+      await db.none(
+        'UPDATE users SET fitness_points = fitness_points + 1, last_checkin = $1 WHERE username = $2',
+        [currentDate, user.username]
+      );
+    } 
+    else {
+      // User has already checked in today, don't show the popup
+      req.session.showCheckInPopup = false;
+    }
+
+        req.session.save(() => {
         res.redirect('/home');
       });
 
@@ -219,7 +245,6 @@ app.post('/login', async (req, res) => {
     res.render('pages/login', { message: 'An error occurred during login.' });
   }
 });
-   
 
 const auth = (req, res, next) => {
   if (!req.session.user) {
@@ -232,7 +257,7 @@ app.use(auth);
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.render('pages/logout');
+  res.redirect('/');
 });
 
 // Starting the server

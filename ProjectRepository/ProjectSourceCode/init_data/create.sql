@@ -9,7 +9,8 @@ CREATE TABLE IF NOT EXISTS users(
     weight FLOAT CHECK (weight > 0),
     height_feet INT CHECK (height_feet > 0),
     height_inch INT CHECK (height_inch > 0),
-    fitness_points INT DEFAULT 0
+    fitness_points INT DEFAULT 0,
+    last_checkin DATE DEFAULT NULL
 );
 
 /*
@@ -32,10 +33,4 @@ CREATE TABLE IF NOT EXISTS usersToFitness(
     FOREIGN KEY (fitness_id) REFERENCES fitness(fitness_id),
     PRIMARY KEY (user_id, fitness_id)
 );
-
-
-
-
-
-
 

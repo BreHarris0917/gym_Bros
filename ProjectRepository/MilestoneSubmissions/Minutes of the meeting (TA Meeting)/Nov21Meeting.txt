@@ -1,0 +1,16 @@
+November 21st meeting 
+
+shop is updated, there is a search bar
+database up and running 
+about us page 
+information shows for person 
+the workouts are saved to the home page (last fitness information)
+
+to do:
+fix the database issues that arent working
+working on a social media aspect still 
+
+TA comments:
+pretty good
+everything is there
+add some symbols/icons images to the workout page

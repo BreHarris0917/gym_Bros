@@ -1,0 +1,25 @@
+week 1 10/27-11/2
+
+Updates:
+worked through the lab10
+created project board
+assigned tasks to group members 
+created necessary/missing files and pushed them to github
+resolved branch issues/created missing branches 
+
+
+Plan for next meeting:
+resolve any issues that arose
+work on missing features together 
+discuss issues/successes 
+assign the next tasks to group members
+
+
+Highlights:
+we figured out gitPull 
+
+
+Plan for continuation of the week:
+work on our tasks
+meet with TA
+meet up if needed
