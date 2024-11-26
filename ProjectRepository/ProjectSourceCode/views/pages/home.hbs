@@ -36,21 +36,12 @@
                             <td>{{username}}</td>
                         </tr>
                         <tr>
-                            <td><strong>Password:</strong></td>
-                            <td><input type="password" id="password" value="{{password}}" class="form-control" readonly></td>
-                            <td colspan="4"><button type="button" class="btn btn-primary" onclick="toggle()">Show/Hide</button></td>
-                        </tr>
-                        <tr>
                             <td><strong>Age:</strong></td>
                             <td>{{age}}</td>
                         </tr>
                         <tr>
                             <td><strong>Height:</strong></td>
-                            <td>{{height_feet}}</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Height:</strong></td>
-                            <td>{{height_inch}}</td>
+                            <td>{{height_feet}}' {{height_inch}}"</td>
                         </tr>
                         <tr>
                             <td><strong>Weight:</strong></td>
@@ -63,17 +54,6 @@
     </div>
 
     {{> footer}}
-
-    <script>
-       function toggle() {
-    const passwordElement = document.getElementById("password");
-    if (passwordElement.type === "password") {
-        passwordElement.type = "text"; 
-    } else {
-        passwordElement.type = "password"; 
-    }
-}
-    </script>
 
 </body>
 </html>

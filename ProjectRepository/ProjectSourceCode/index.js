@@ -77,12 +77,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-
   if(!req.session.user){
     return res.redirect('/login');
   }
-
-  console.log('User session data:', req.session.user);
 
   res.render('pages/home',  {
     username: req.session.user.username,
@@ -107,7 +104,13 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/fitness', (req, res) => {
-  res.render('pages/fitness')
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
+  res.render('pages/fitness', {
+    firstName: req.session.user.firstName 
+  });
 });
 
 app.get('/shop', (req, res) => {
@@ -127,53 +130,68 @@ app.get('/aboutus', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-  //hash the password using bcrypt library
-  const username = req.body.username;
-  const password = req.body.password;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const age = req.body.age;
-  const weight = req.body.weight;
-  const height_feet = req.body.height_feet;
-  const height_inch = req.body.height_inch;
+  const {
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    age,
+    weight,
+    height_feet,
+    height_inch,
+  } = req.body;
+
   const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
   
-  bcrypt.hash(password, 10)
-  .then(hash => {
-    return db.query(query, [username, hash, firstName, lastName, email, age, weight, height_feet, height_inch ]);
-  })
-  .then(() => {
+  try{
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.query(query, [
+      username,
+      hashedPassword,
+      firstName,
+      lastName,
+      email,
+      age,
+      weight,
+      height_feet,
+      height_inch,
+    ]);
+
     req.session.user = {
-      username: username,
-      password: password,
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      height_feet: height_feet,
-      height_inch: height_inch,
-      weight: weight,
-      age: age
+      username,
+      firstName,
+      lastName,
+      email,
+      height_feet,
+      height_inch,
+      weight,
+      age,
     };
+
+
     req.session.save(() => {
       res.redirect('/home');
     });
-  })
-  .catch(error => {
+
+  }catch(error) {
     console.error(error);
     res.render('pages/register', { message: 'Registration failed.' });
-  });
+  }
 });
 
 app.post('/login', async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+
+  const { username, password } = req.body;
 
   try {
-    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
+    const user = await db.oneOrNone('SELECT username, password, firstname, lastname, email, weight, height_feet, height_inch, age FROM users WHERE username = $1', [username]);
     if (!user) {
-      return res.redirect('/register');
+      return res.render('pages/login', {message: 'User not found, please register.'});
     }
+
+    console.log('Database user object:', user);
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
@@ -182,18 +200,16 @@ app.post('/login', async (req, res) => {
 
     req.session.user = {
       username: user.username,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstname,
+      lastName: user.lastname,
       email: user.email,
-      weight: user.weight,
-      height_feet: user.height_feet,
-      height_inch: user.height_inch,
-      age: user.age
+      weight: Number(user.weight),
+      height_feet: Number(user.height_feet),
+      height_inch: Number(user.height_inch),
+      age: Number(user.age)
     };
 
-
-        req.session.save(() => {
+     req.session.save(() => {
         res.redirect('/home');
       });
 
@@ -213,10 +229,6 @@ const auth = (req, res, next) => {
 };
 
 app.use(auth);
-
-app.get('/home', (req, res) => {
-  res.render('pages/home');
-});
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
