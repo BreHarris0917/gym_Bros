@@ -70,7 +70,7 @@ const user = {
   height_inch: undefined,
   weight: undefined,
   age: undefined,
-  points: undefined
+  fitness_points: undefined
 };
 
 app.get('/', (req, res) => {
@@ -170,7 +170,7 @@ app.post('/register', async (req, res) => {
       height_feet,
       height_inch,
       weight,
-      age,
+      age
     };
 
 
@@ -189,7 +189,7 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   try {
-    const user = await db.oneOrNone('SELECT username, password, firstname, lastname, email, weight, height_feet, height_inch, age FROM users WHERE username = $1', [username]);
+    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
     if (!user) {
       return res.render('pages/login', {message: 'User not found, please register.'});
     }

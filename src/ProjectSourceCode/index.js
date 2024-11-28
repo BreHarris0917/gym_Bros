@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); //to set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcryptjs'); //to hash passwords
 const axios = require('axios'); //to make HTTP requests from our server. 
+const { error } = require('console');
 
 // App Settings
 // ------------------------------
@@ -69,20 +70,19 @@ const user = {
   height_feet:undefined,
   height_inch: undefined,
   weight: undefined,
-  age: undefined
+  age: undefined,
+  fitness_points: undefined
 };
 
 app.get('/', (req, res) => {
-  res.redirect('/home');
+  const isLoggedIn = req.session && req.session.user; 
+  res.render('/login', {isLoggedIn});
 });
 
 app.get('/home', (req, res) => {
-
   if(!req.session.user){
     return res.redirect('/login');
   }
-
-  console.log('User session data:', req.session.user);
 
   res.render('pages/home',  {
     username: req.session.user.username,
@@ -93,10 +93,11 @@ app.get('/home', (req, res) => {
     height_feet: req.session.user.height_feet,
     height_inch: req.session.user.height_inch,
     weight: req.session.user.weight,
-    age: req.session.user.age
+    age: req.session.user.age,
+    fitness_points: req.session.user.fitness_points,
+    showCheckInPopup: req.session.showCheckInPopup
   });
 });
-
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
@@ -107,7 +108,13 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/fitness', (req, res) => {
-  res.render('pages/fitness')
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
+  res.render('pages/fitness', {
+    firstName: req.session.user.firstName 
+  });
 });
 
 app.get('/shop', (req, res) => {
@@ -127,82 +134,116 @@ app.get('/aboutus', (req, res) => {
 });
 
 app.post('/register', async (req, res) => {
-  //hash the password using bcrypt library
-  const username = req.body.username;
-  const password = req.body.password;
-  const firstName = req.body.firstName;
-  const lastName = req.body.lastName;
-  const email = req.body.email;
-  const age = req.body.age;
-  const weight = req.body.weight;
-  const height_feet = req.body.height_feet;
-  const height_inch = req.body.height_inch;
+  const {
+    username,
+    password,
+    firstName,
+    lastName,
+    email,
+    age,
+    weight,
+    height_feet,
+    height_inch,
+  } = req.body;
+
   const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
   
-  bcrypt.hash(password, 10)
-  .then(hash => {
-    return db.query(query, [username, hash, firstName, lastName, email, age, weight, height_feet, height_inch ]);
-  })
-  .then(() => {
+  try{
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    await db.query(query, [
+      username,
+      hashedPassword,
+      firstName,
+      lastName,
+      email,
+      age,
+      weight,
+      height_feet,
+      height_inch
+    ]);
+
     req.session.user = {
-      username: username,
-      password: password,
-      firstName: firstName, 
-      lastName: lastName,    
-      email: email,
-      age: age,
-      weight: weight,
-      height_feet: height_feet,
-      height_inch: height_inch
+      username,
+      firstName,
+      lastName,
+      email,
+      height_feet,
+      height_inch,
+      weight,
+      age
     };
+
+
     req.session.save(() => {
       res.redirect('/home');
     });
-  })
-  .catch(error => {
+
+  }catch(error) {
     console.error(error);
-    res.render('pages/register', { message: 'Registration failed.' });
-  });
+    res.render('pages/register', { message: 'Registration failed.' , error:true});
+  }
 });
 
 app.post('/login', async (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+
+  const { username, password } = req.body;
 
   try {
     const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
     if (!user) {
-      return res.redirect('/register');
+      return res.render('pages/login', {message: 'User not found, please register.', error:true});
     }
+
+    console.log('Database user object:', user);
 
     const match = await bcrypt.compare(password, user.password);
     if (!match) {
-      return res.render('pages/login', { message: 'Incorrect username or password.' });
+      return res.render('pages/login', { message: 'Incorrect username or password.', error:true});
     }
-
 
     req.session.user = {
       username: user.username,
-      password: user.password,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstname,
+      lastName: user.lastname,
       email: user.email,
-      weight: user.weight,
-      height_feet: user.height_feet,
-      height_inch: user.height_inch,
-      age: user.age
+      weight: Number(user.weight),
+      height_feet: Number(user.height_feet),
+      height_inch: Number(user.height_inch),
+      age: Number(user.age),
+      fitness_points: Number(user.fitness_points)
     };
 
-        req.session.save(() => {
-        res.redirect('/home');
-      });
+    // Check if the user has checked in today
+    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
 
+    if (user.last_checkin !== currentDate) {
+      // User has not checked in today, show the popup and update fitness points
+      req.session.showCheckInPopup = true;
+      
+      // Update fitness points and last check-in date
+      await db.none(
+        'UPDATE users SET fitness_points = fitness_points + 1, last_checkin = $1 WHERE username = $2',
+        [currentDate, user.username]
+      );
+    } 
+    else {
+      // User has already checked in today, don't show the popup
+      req.session.showCheckInPopup = false;
+    }
+
+    req.session.save((err) => {
+      if (err) {
+        console.error('Session save error:', err);
+        return res.render('pages/login', { message: 'An error occurred during login.', error:true});
+      }
+      res.redirect('/home');
+    });
   } catch (error) {
     console.error(error);
-    res.render('pages/login', { message: 'An error occurred during login.' });
+    res.render('pages/login', { message: 'An error occurred during login.', error:true});
   }
 });
-   
 
 const auth = (req, res, next) => {
   if (!req.session.user) {
@@ -213,13 +254,9 @@ const auth = (req, res, next) => {
 
 app.use(auth);
 
-app.get('/home', (req, res) => {
-  res.render('pages/home');
-});
-
 app.get('/logout', (req, res) => {
   req.session.destroy();
-  res.render('pages/logout');
+  res.redirect('/');
 });
 
 // Starting the server
