@@ -13,6 +13,7 @@ const axios = require('axios'); //to make HTTP requests from our server.
 const { error } = require('console');
 
 // App Settings
+
 // ------------------------------
 //create `ExpressHandlebars` instance and configure the layouts and partials dir.
 const hbs = handlebars.create({
@@ -38,6 +39,29 @@ app.use(
   })
 );
 
+// Register a Handlebars helper to add 1 to the index
+hbs.handlebars.registerHelper('add', function(a, b) {
+  return a + b;
+});
+
+Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+  switch (operator) {
+    case '==':
+      return v1 == v2 ? options.fn(this) : options.inverse(this);
+    case '===':
+      return v1 === v2 ? options.fn(this) : options.inverse(this);
+    case '<':
+      return v1 < v2 ? options.fn(this) : options.inverse(this);
+    case '>':
+      return v1 > v2 ? options.fn(this) : options.inverse(this);
+    case '<=':
+      return v1 <= v2 ? options.fn(this) : options.inverse(this);
+    case '>=':
+      return v1 >= v2 ? options.fn(this) : options.inverse(this);
+    default:
+      return options.inverse(this);
+  }
+});
 
 // -------------------------------------  DB CONFIG AND CONNECT   ---------------------------------------
 const dbConfig = {
@@ -75,8 +99,7 @@ const user = {
 };
 
 app.get('/', (req, res) => {
-  const isLoggedIn = req.session && req.session.user; 
-  res.render('/login', {isLoggedIn});
+  res.redirect('/login');
 });
 
 app.get('/home', (req, res) => {
@@ -132,6 +155,18 @@ app.get('/checkout', (req, res) => {
 app.get('/aboutus', (req, res) => {
   res.render('pages/aboutus')
 });
+
+app.get('/leaderboard', async (req, res) => {
+  try {
+    const leaderboard = await db.any('SELECT username, fitness_points FROM users ORDER BY fitness_points DESC LIMIT 10');
+
+    res.render('pages/leaderboard', { leaderboard });
+  } catch (error) {
+    console.error('Error fetching leaderboard:', error);
+    res.render('pages/leaderboard', { message: 'An error occurred while fetching the leaderboard.', error:true });
+  }
+});
+
 
 app.post('/register', async (req, res) => {
   const {
@@ -251,6 +286,98 @@ const auth = (req, res, next) => {
   }
   next();
 };
+
+
+app.post('/home', async (req, res) => {
+  const { oldPassword, newPassword, confirmPassword } = req.body;
+  
+  if (newPassword !== confirmPassword) {
+    return res.render('pages/home',  {
+      username: req.session.user.username,
+      password: req.session.user.password,
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      email: req.session.user.email,
+      height_feet: req.session.user.height_feet,
+      height_inch: req.session.user.height_inch,
+      weight: req.session.user.weight,
+      age: req.session.user.age,
+      fitness_points: req.session.user.fitness_points,
+      showCheckInPopup: req.session.showCheckInPopup,
+      message: 'New passwords do not match!',
+      error: true
+    });
+  }
+
+  const username = req.session.user.username;
+
+  try {
+    const user = await db.oneOrNone('SELECT username, password FROM users WHERE username = $1', [username]);
+
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+
+    const isOldPasswordValid = await bcrypt.compare(oldPassword, user.password);
+
+    if (!isOldPasswordValid) {
+      return res.render('pages/home', {
+        username: req.session.user.username,
+        password: req.session.user.password,
+        firstName: req.session.user.firstName,
+        lastName: req.session.user.lastName,
+        email: req.session.user.email,
+        height_feet: req.session.user.height_feet,
+        height_inch: req.session.user.height_inch,
+        weight: req.session.user.weight,
+        age: req.session.user.age,
+        fitness_points: req.session.user.fitness_points,
+        showCheckInPopup: req.session.showCheckInPopup,
+        message: 'Incorrect old password.',
+        error: true
+      });
+    }
+
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    await db.none('UPDATE users SET password = $1 WHERE username = $2', [hashedNewPassword, username]);
+
+    req.session.user.password = hashedNewPassword;
+
+    res.render('pages/home', {
+      username: req.session.user.username,
+      password: req.session.user.password,
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      email: req.session.user.email,
+      height_feet: req.session.user.height_feet,
+      height_inch: req.session.user.height_inch,
+      weight: req.session.user.weight,
+      age: req.session.user.age,
+      fitness_points: req.session.user.fitness_points,
+      showCheckInPopup: req.session.showCheckInPopup,
+      message: 'Password successfully changed!',
+      error: false
+    });
+  } catch (error) {
+    console.error(error);
+    res.render('pages/home', {
+      username: req.session.user.username,
+      password: req.session.user.password,
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      email: req.session.user.email,
+      height_feet: req.session.user.height_feet,
+      height_inch: req.session.user.height_inch,
+      weight: req.session.user.weight,
+      age: req.session.user.age,
+      fitness_points: req.session.user.fitness_points,
+      showCheckInPopup: req.session.showCheckInPopup,
+      message: 'An error occurred while changing the password.',
+      error: true
+    });
+  }
+});
 
 app.use(auth);
 
