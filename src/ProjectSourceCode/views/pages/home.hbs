@@ -9,6 +9,7 @@
     <script src="../../resources/js/script.js"></script>
 </head>
 <body>
+     {{> message}}
     <div class="container mt-5">
         <h1 class="text-center mb-4">Gym Bros</h1>
         <!--Card container for the profile-->
@@ -46,6 +47,10 @@
                         <tr>
                             <td><strong>Weight:</strong></td>
                             <td>{{weight}}</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Fitness Points:</strong></td>
+                            <td>{{fitness_points}}</td>
                         </tr>
                     </tbody>
                 </table>
