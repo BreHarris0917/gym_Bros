@@ -319,11 +319,14 @@
                 addPoints(points); //Update points if points are greater than zero
                 //TODO: Make this POST function!!!! ^^^^
             }
+
             const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
             workoutModal.hide(); //Closing the modal to open the summary modal
             const workoutSummaryModal = new bootstrap.Modal(document.getElementById('workoutSummaryModal'));
             workoutSummaryModal.show(); //Show the summary
         }
+
+
         //Reset the timer to 0
         function resetTimer() {
             timer = { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }; //Set timer values to zero
