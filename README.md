@@ -1,34 +1,89 @@
-# Gym Bros (fitness tracker)
---*Group project for Software Development Methods CSCI 3308*--
+# Gym Bros (Fitness Tracker)
 
-## Project Expectations
-This will be a fitness tracking, The goals of this project will be to create an in app store, profiles, friending other people and possibly a map feature. 
-** feel free to add to this if you want ** 
+> Group project for Software Development Methods CSCI 3308.
 
-### In-app store features 
-This feature will allow the user to browse a selection of products for purchase such as protein shakes, protein bars, workout equipment i.e. straps, weight belts, sweat bands, MERRRRCH.
-FIELDS:
-Input address for shipping
-Input credit card information
-SQL Database for tracking order and resolving many to many relationships involving customer order -> customer ID 
+## Table of Contents
 
+- [About the Project](#about-the-project)
+- [Features](#features)
+- [Technology Stack](#technology-stack)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Running Tests](#running-tests)
+- [Contributors](#contributors)
+- [Deployed Application](#deployed-application)
+- [Acknowledgements](#acknowledgements)
 
-#### Profile 
-This field will allow users to create, edit and update their profiles. 
-FIELDS:
-Input first, last name
-Input phone number
-Input email address
-Add user profile picture
-FEATURES:
-Keep chronological time line of posts, newer posts show up first
+## About the Project
 
-##### Friending other people
-This feature will allow users to friend other users that are also on the app. 
-=======
-##### friending other people
-this feaure will allow users to friend other users that are also on the app.
+This will be a fitness tracking application. The goals of this project include creating:
+- An in-app store
+- User profiles
+- A friending feature to connect with others
+- Potentially a map feature for tracking workouts
 
->>>>>>> 421dc20 (Save local changes to README.md)
+## Features
 
+### In-App Store
+This feature will allow the user to browse a selection of products for purchase, such as:
+- Protein shakes
+- Protein bars
+- Workout equipment (e.g., straps, weight belts, sweatbands)
+- Merchandise (MERRRRCH)
 
+**Fields**:
+- Input address for shipping
+- Input credit card information
+
+**Backend**:
+- SQL Database for tracking orders and resolving many-to-many relationships involving `customer_order -> customer_ID`.
+
+### Profile
+This field will allow users to create, edit, and update their profiles.
+
+**Fields**:
+- Input first and last name
+- Input phone number
+- Input email address
+- Add user profile picture
+
+**Features**:
+- Keep a chronological timeline of posts, with newer posts appearing first.
+
+### Friending Other People
+This feature will allow users to friend other users that are also on the app.
+
+---
+
+## Technology Stack
+
+*(To be filled out)*
+
+## Prerequisites
+
+*(To be filled out)*
+
+## Installation
+
+*(To be filled out)*
+
+## Usage
+
+*(To be filled out)*
+
+## Running Tests
+
+*(To be filled out)*
+
+## Contributors
+
+- *(Add team members here)*
+
+## Deployed Application
+
+*(To be filled out with the link to the deployed application)*
+
+## Acknowledgements
+
+*(Optional section for any additional credits)*
