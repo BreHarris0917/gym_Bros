@@ -13,15 +13,15 @@
 - [Running Tests](#running-tests)
 - [Contributors](#contributors)
 - [Deployed Application](#deployed-application)
-- [Acknowledgements](#acknowledgements)
 
 ## About the Project
 
 This will be a fitness tracking application. The goals of this project include creating:
-- An in-app store
-- User profiles
-- A friending feature to connect with others
-- Potentially a map feature for tracking workouts
+- An in-app store with select products.
+- Home page with user profile.
+- A database leaderboard. 
+- About us page.
+- Workout recording page. 
 
 ## Features
 
@@ -78,12 +78,14 @@ This feature will allow users to friend other users that are also on the app.
 
 ## Contributors
 
-- *(Add team members here)*
+- Breanna Harris
+- Idaly Gomez-Pena
+- Joanne Li
+- Joe Voirol
+- John Kim
+- Nicole Paraschiv
 
 ## Deployed Application
 
 *(To be filled out with the link to the deployed application)*
 
-## Acknowledgements
-
-*(Optional section for any additional credits)*
