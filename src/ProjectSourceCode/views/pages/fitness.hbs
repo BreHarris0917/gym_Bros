@@ -11,8 +11,9 @@
     .modal-content { max-width: 400px; margin: auto; }
 </style> <!--Centering the modal for the workout popup-->
 <body>
+     {{> message}}
     <div class="container mt-5">
-        <h2 class="text-center">Welcome, {{first_name}}!</h2>
+        <h2 class="text-center">Welcome, {{firstName}}!</h2>
     </div>
     <div class="container mt-5">
         <div class="row">
@@ -318,11 +319,14 @@
                 addPoints(points); //Update points if points are greater than zero
                 //TODO: Make this POST function!!!! ^^^^
             }
+
             const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
             workoutModal.hide(); //Closing the modal to open the summary modal
             const workoutSummaryModal = new bootstrap.Modal(document.getElementById('workoutSummaryModal'));
             workoutSummaryModal.show(); //Show the summary
         }
+
+
         //Reset the timer to 0
         function resetTimer() {
             timer = { hours: 0, minutes: 0, seconds: 0, milliseconds: 0 }; //Set timer values to zero
