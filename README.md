@@ -51,7 +51,7 @@ This field will allow users to create, edit, and update their profiles.
 **Features**:
 - Keep a chronological timeline of posts, with newer posts appearing first.
 
-### Friending Other People
+### Leaderboard
 This feature will allow users to friend other users that are also on the app.
 
 ---
