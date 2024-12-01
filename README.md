@@ -18,7 +18,8 @@
 
 ## About the Project
 
-This will be a fitness tracking application. The goals of this project include creating:
+This will be a fitness tracking application. Our website aims at helping people work on their fitness goals. Allowing them to record their workouts and save them to their profile. Our application also introduces competition with a built in leaderboard of all users. As well as a select shop to provide users with an interactive shopping interface. 
+The goals of this project include creating:
 - An in-app store with select products.
 - Home page with user profile.
 - A database leaderboard. 
