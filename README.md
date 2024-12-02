@@ -95,5 +95,5 @@ SQL
 
 ## Deployed Application
 
-*(To be filled out with the link to the deployed application)*
+https://gym-bros.onrender.com/login
 
