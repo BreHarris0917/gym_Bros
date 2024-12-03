@@ -156,6 +156,10 @@ app.get('/shop', (req, res) => {
   res.render('pages/shop')
 });
 
+app.get('/workout', (req, res) => {
+  res.render('pages/workout')
+});
+
 app.get('/cart', (req, res) => {
   res.render('pages/cart')
 });
