@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        header {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 15px 0;
+        }
+        a {
+            text-decoration: none;
+            color: #0073e6;
+            font-size: 1.2em;
+        }
+        a:hover {
+            color: #005bb5;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Choose Your Workout</h1>
+        <p>Click on a workout below to start your YouTube session!</p>
+    </header>
+    
+    <main>
+        <ul id="workoutList">
+            <!-- Workout links will be populated here by JavaScript -->
+        </ul>
+    </main>
+
+    <script>
+        // Define workout data
+        const workouts = [
+            {
+                title: "HIIT Cardio Workout",
+                link: "https://www.youtube.com/watch?v=ml6cT4AZdqI",
+                description: "A high-intensity interval training workout to burn calories fast."
+            },
+            {
+                title: "Full Body Strength Training",
+                link: "https://www.youtube.com/watch?v=UBMk30rjy0o",
+                description: "A strength workout that targets all major muscle groups."
+            },
+            {
+                title: "Yoga for Flexibility",
+                link: "https://www.youtube.com/watch?v=v7AYKMP6rOE",
+                description: "A yoga session to increase flexibility and relax."
+            }
+        ];
+
+        // Function to render workout links
+        function renderWorkouts() {
+            const workoutList = document.getElementById('workoutList');
+            workouts.forEach(workout => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = workout.link;
+                link.target = "_blank";
+                link.innerText = workout.title;
+
+                const description = document.createElement('p');
+                description.innerText = workout.description;
+
+                listItem.appendChild(link);
+                listItem.appendChild(description);
+                workoutList.appendChild(listItem);
+            });
+        }
+
+        // Call the function to render the workouts
+        renderWorkouts();
+    </script>
+</body>
+</html>
