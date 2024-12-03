@@ -102,25 +102,37 @@ app.get('/', (req, res) => {
   res.redirect('/login');
 });
 
-app.get('/home', (req, res) => {
-  if(!req.session.user){
+app.get('/home', async (req, res) => {
+  if (!req.session.user) {
     return res.redirect('/login');
   }
 
-  res.render('pages/home',  {
-    username: req.session.user.username,
-    password: req.session.user.password,
-    firstName: req.session.user.firstName,
-    lastName: req.session.user.lastName,
-    email: req.session.user.email,
-    height_feet: req.session.user.height_feet,
-    height_inch: req.session.user.height_inch,
-    weight: req.session.user.weight,
-    age: req.session.user.age,
-    fitness_points: req.session.user.fitness_points,
-    showCheckInPopup: req.session.showCheckInPopup
-  });
+  try {
+    const user = await db.oneOrNone('SELECT fitness_points FROM users WHERE username = $1', [req.session.user.username]);
+    
+    if (!user) {
+      return res.redirect('/login');
+    }
+
+    res.render('pages/home', {
+      username: req.session.user.username,
+      password: req.session.user.password,
+      firstName: req.session.user.firstName,
+      lastName: req.session.user.lastName,
+      email: req.session.user.email,
+      height_feet: req.session.user.height_feet,
+      height_inch: req.session.user.height_inch,
+      weight: req.session.user.weight,
+      age: req.session.user.age,
+      fitness_points: user.fitness_points, // Fetched from the database
+      showCheckInPopup: req.session.showCheckInPopup
+    });
+  } catch (error) {
+    console.error('Error fetching fitness points:', error);
+    res.redirect('/login');
+  }
 });
+
 
 app.get('/login', (req, res) => {
   res.render('pages/login')
