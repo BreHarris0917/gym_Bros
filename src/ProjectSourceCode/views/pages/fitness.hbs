@@ -206,6 +206,9 @@
                     <!-- Timer and End Workout buttons -->
                     <button id="timerBtn" class="btn btn-primary" onclick="toggleTimer()">Timer Start</button> <!--Starts the function and toggles timer on/off-->
                     <button class="btn btn-danger" onclick="endWorkout()">End Workout</button> <!--Ends workout and hopefully(?) resets the timer-->
+                    <form action="/submit-points" method="POST" style="display: none;" id="submitPointsForm">
+                        <input type="hidden" name="points" id="pointsInput" value="0">
+                    </form>
                 </div>
             </div>
         </div>
@@ -225,6 +228,7 @@
                     <p id="summaryWorkout">Workout: </p>
                     <p id="summaryTime">Time Worked Out: </p>
                     <p id="summaryCalories">Calories Burned: </p>
+                    <p id="summaryPoints">Points Earned: </p>
                 </div> <!--Show the user's stats-->
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -300,30 +304,47 @@
             isRunning = false; //Timer is running no more!!
             document.getElementById('timerBtn').innerText = "Timer Start"; //Reset timer back to "timer start"
 
+            if (isRunning) {
+                clearInterval(timerInterval); //Clear the interval to stop the timer
+                isRunning = false; //Set running to false
+            }
+            document.getElementById('timerBtn').innerText = "Timer Start"; //Reset text
+
             //We calculate the amount of seconds in the timer
             const totalSeconds = timer.hours * 3600 + timer.minutes * 60 + timer.seconds + (timer.milliseconds / 1000);
             const caloriesBurned = (totalSeconds * multipliers[workoutNumber]).toFixed(2); //Multiplies the multiplier of the workout (listed in variables) with seconds, returns caloriesBurned
             const timeWorkedOut = `${String(timer.hours).padStart(2, '0')}:${String(timer.minutes).padStart(2, '0')}:${String(timer.seconds).padStart(2, '0')}`; //Worked out time, displays with hour : minute : second
             const workoutTitle = document.querySelector(`.start-workout-btn[data-workout="${workoutNumber}"]`).getAttribute('data-title');
 
+            //Calculate points: 100 kcal = 1 point
+            const points = Math.floor(caloriesBurned / 1);
+
             //Staging workout summary data so that it shows up in the summary modal
             document.getElementById('summaryWorkout').innerText = `Workout: ${workoutTitle}`;
             document.getElementById('summaryTime').innerText = `Time Worked Out: ${timeWorkedOut}`;
             document.getElementById('summaryCalories').innerText = `Calories Burned: ${caloriesBurned} kcal`;
+            document.getElementById('summaryPoints').innerText = `Points Earned: ${points} points`;
 
             //Resets the timer cuz you're done
             resetTimer();
-            //Calculate points: 100 kcal = 1 point
-            const points = Math.floor(caloriesBurned / 1);
             if (points > 0) {
-                addPoints(points); //Update points if points are greater than zero
-                //TODO: Make this POST function!!!! ^^^^
-            }
+                    document.getElementById('pointsInput').value = points;
 
-            const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
-            workoutModal.hide(); //Closing the modal to open the summary modal
-            const workoutSummaryModal = new bootstrap.Modal(document.getElementById('workoutSummaryModal'));
-            workoutSummaryModal.show(); //Show the summary
+                    //Hide the workout modal
+                    const workoutModal = bootstrap.Modal.getInstance(document.getElementById('workoutModal'));
+                    workoutModal.hide();
+                    document.querySelectorAll('.modal-backdrop').forEach(backdrop => backdrop.remove());
+
+                    //Show the workout summary modal
+                    const workoutSummaryModal = new bootstrap.Modal(document.getElementById('workoutSummaryModal'));
+                    workoutSummaryModal.show();
+
+                    //Attach the form submission to the "hidden.bs.modal" event for the workout summary modal
+                    document.getElementById('workoutSummaryModal').addEventListener('hidden.bs.modal', function () {
+                        const form = document.getElementById('submitPointsForm');
+                        form.submit(); // Submit the points form when the summary modal is closed
+                });
+            }
         }
 
 
@@ -339,19 +360,6 @@
             document.getElementById('seconds').innerText = '00';
             document.getElementById('milliseconds').innerText = '000';
         }
-
-        //TODO: Point system, 100 kcal = 1 point (?)
-        //Maybe add this to the endWorkout function:
-        //const points = cal / 100
-        //if points > 0, "congrats bro"
-        //new function: addPoints(points)
-
-        //TODO: addPoints() function
-        //<form action="/login" method="POST"> //Okay not this because we're writing a script but you get the gist of it
-        //{{user}}
-        //points: points
-        //Maybe error message if unresponsive, success message if points are updated
-        //</form>
 
     </script>
 </body>
