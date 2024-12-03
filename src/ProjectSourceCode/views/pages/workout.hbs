@@ -46,21 +46,36 @@
     <script>
         // Define workout data
         const workouts = [
-            {
-                title: "HIIT Cardio Workout",
-                link: "https://www.youtube.com/watch?v=ml6cT4AZdqI",
-                description: "A high-intensity interval training workout to burn calories fast."
-            },
-            {
-                title: "Full Body Strength Training",
-                link: "https://www.youtube.com/watch?v=UBMk30rjy0o",
-                description: "A strength workout that targets all major muscle groups."
-            },
-            {
-                title: "Yoga for Flexibility",
-                link: "https://www.youtube.com/watch?v=v7AYKMP6rOE",
-                description: "A yoga session to increase flexibility and relax."
-            }
+            { title: "HIIT Cardio Blast", link: "https://www.youtube.com/watch?v=ml6cT4AZdqI", description: "This fast-paced HIIT workout alternates between intense cardio bursts and rest, keeping your heart rate elevated for maximum fat burning and endurance building." },
+            { title: "Strength Training Full Body", link: "https://www.youtube.com/watch?v=UBMk30rjy0o", description: "Build muscle and tone your entire body with a variety of compound movements focusing on strength, endurance, and functional fitness." },
+            { title: "Lower Body Sculpt", link: "https://www.youtube.com/watch?v=Xz1hKB0mw9U", description: "Target your legs and glutes with exercises like squats and lunges, designed to tone, strengthen, and improve lower body endurance." },
+            { title: "Core Stability Challenge", link: "https://www.youtube.com/watch?v=8DZktowZo_k", description: "Strengthen your core muscles with this workout focusing on abs, obliques, and lower back, improving balance and posture." },
+            { title: "Balance & Coordination", link: "https://www.youtube.com/watch?v=Z42mr3SGZVs", description: "Improve your coordination and stability with exercises designed to engage your core and stabilizing muscles for better functional movement." },
+            { title: "Advanced HIIT Workout", link: "https://www.youtube.com/watch?v=dF7T6AHMenk", description: "Push your limits with explosive cardio intervals, perfect for seasoned fitness enthusiasts looking to maximize calorie burn and stamina." },
+            { title: "Upper Body Strength", link: "https://www.youtube.com/watch?v=SB1YzwV0x_I", description: "Focus on arms, chest, and shoulders with this session that includes push-ups, rows, and other targeted upper body moves." },
+            { title: "Yoga for Flexibility", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "Increase flexibility and reduce stress with this yoga sequence that helps elongate muscles and improve range of motion." },
+            { title: "Guided Meditation", link: "https://www.youtube.com/watch?v=inpok4MKVLM", description: "Calm your mind and center your thoughts with this relaxing guided meditation session focused on mindfulness and breathing." },
+            { title: "Quick Dance Cardio", link: "https://www.youtube.com/watch?v=dF7T6AHMenk", description: "Get moving with a high-energy dance workout that combines fun choreography with an intense cardio burn." },
+            { title: "Full-Body Dynamic Stretch", link: "https://www.youtube.com/watch?v=inpok4MKVLM", description: "Loosen up tight muscles and prepare your body for movement with this dynamic full-body stretching routine." },
+            { title: "Morning Energy Yoga", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "Start your day with an energizing yoga flow that awakens the body and sets a positive tone for the day ahead." },
+            { title: "Evening Relaxation Yoga", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "Wind down with a calming yoga session designed to help you release tension and relax before bed." },
+            { title: "Cardio Core Burn", link: "https://www.youtube.com/watch?v=8DZktowZo_k", description: "Combine cardio and core strengthening exercises to burn calories while building a stronger midsection." },
+            { title: "Chair Yoga", link: "https://www.youtube.com/watch?v=inpok4MKVLM", description: "A gentle chair yoga routine suitable for seniors or anyone with limited mobility to improve flexibility and balance." },
+            { title: "Leg Day Intensity", link: "https://www.youtube.com/watch?v=Xz1hKB0mw9U", description: "Focus on building strength and endurance in your legs and glutes with challenging lower body exercises." },
+            { title: "Dynamic Warm-Up", link: "https://www.youtube.com/watch?v=Z42mr3SGZVs", description: "A short but effective warm-up routine to prepare your muscles and joints for a more intense workout." },
+            { title: "Balance Builder", link: "https://www.youtube.com/watch?v=Z42mr3SGZVs", description: "Enhance your coordination and build core strength with balance-focused movements." },
+            { title: "Intense Cardio Endurance", link: "https://www.youtube.com/watch?v=ml6cT4AZdqI", description: "Challenge your cardiovascular system with long intervals designed to boost stamina and endurance." },
+            { title: "Advanced Full Body Burn", link: "https://www.youtube.com/watch?v=UBMk30rjy0o", description: "A challenging workout for experienced fitness enthusiasts that targets all major muscle groups with complex, high-intensity moves." },
+            { title: "Power Yoga Flow", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "Build strength and flexibility with this dynamic power yoga session combining strength-building poses with flowing transitions." },
+            { title: "10-Minute Quick Cardio", link: "https://www.youtube.com/watch?v=dF7T6AHMenk", description: "A quick cardio burst for busy days when you need an effective workout in a short amount of time." },
+            { title: "Strength & Stability Fusion", link: "https://www.youtube.com/watch?v=UBMk30rjy0o", description: "Combine strength training and stability exercises to improve both power and control in your movements." },
+            { title: "Pilates Core Workout", link: "https://www.youtube.com/watch?v=8DZktowZo_k", description: "A pilates-inspired workout focusing on core engagement and controlled movements to build a stronger foundation." },
+            { title: "High-Intensity Plyometrics", link: "https://www.youtube.com/watch?v=ml6cT4AZdqI", description: "Add explosive power to your workout with plyometric exercises like jump squats and burpees, great for building athleticism." },
+            { title: "Stress Relief Stretching", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "Ease stress and release tension with gentle stretches that relax the mind and body." },
+            { title: "Mindfulness Breathing Session", link: "https://www.youtube.com/watch?v=inpok4MKVLM", description: "Focus on your breath and bring awareness to the present moment with this calming breathing session." },
+            { title: "Functional Movement Training", link: "https://www.youtube.com/watch?v=UBMk30rjy0o", description: "Improve your everyday movement with exercises designed to enhance functional strength and mobility." },
+            { title: "30-Minute Cardio Challenge", link: "https://www.youtube.com/watch?v=dF7T6AHMenk", description: "Get your heart rate up and keep moving with a full 30-minute cardio session packed with variety and energy." },
+            { title: "Gentle Yoga Flow", link: "https://www.youtube.com/watch?v=v7AYKMP6rOE", description: "A beginner-friendly yoga sequence focusing on gentle stretches and relaxation to leave you feeling refreshed." }
         ];
 
         // Function to render workout links
