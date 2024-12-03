@@ -152,7 +152,19 @@ app.get('/fitness', (req, res) => {
   });
 });
 
+app.get('/workout', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
+  res.render('pages/workout')
+});
+
 app.get('/shop', (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
   res.render('pages/shop')
 });
 
@@ -173,6 +185,10 @@ app.get('/aboutus', (req, res) => {
 });
 
 app.get('/leaderboard', async (req, res) => {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+
   try {
     const leaderboard = await db.any('SELECT username, fitness_points FROM users ORDER BY fitness_points DESC LIMIT 10');
 
