@@ -379,6 +379,36 @@ app.post('/home', async (req, res) => {
   }
 });
 
+app.post('/submit-points', async (req, res) => {
+  const points = parseInt(req.body.points, 10); //parse points => integer
+  const username = req.body.username || (req.session.user ? req.session.user.username : null);
+
+  if (!points || isNaN(points)) {
+      return res.status(400).send('Invalid points.');
+  }
+
+  try {
+    //Fetch user from database
+    const user = await db.oneOrNone('SELECT * FROM users WHERE username = $1', [username]);
+
+    if (!user) {
+      return res.status(404).send('User not found.');
+    }
+
+    //Update user's points in the database
+    await db.none('UPDATE users SET fitness_points = fitness_points + $1 WHERE username = $2', [points, username]);
+
+    //Update session data if needed
+    req.session.user.fitness_points += points;
+
+    //Redirect the user to the fitness page
+    res.redirect('/fitness');
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while updating the points.' });
+  }
+});
+
 app.use(auth);
 
 app.get('/logout', (req, res) => {
