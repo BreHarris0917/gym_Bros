@@ -94,6 +94,40 @@
         </div>
     </div>
 
+    {{!-- checkin modal --}}
+    <div class="modal fade" id="checkInModal" tabindex="-1" aria-labelledby="checkInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="checkInModalLabel">Daily Check-In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                You’ve earned a fitness point for checking in today! Keep up the great work!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        //TODO: addPoints() function
+        //<form action="/login" method="POST"> //Okay not this because we're writing a script but you get the gist of it
+        //{{user}}
+        //points: points
+        //Maybe error message if unresponsive, success message if points are updated
+        //</form>
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            var myModal = new bootstrap.Modal(document.getElementById('checkInModal'));
+            myModal.show();
+
+        });
+    </script>
+
     {{> footer}}
 
 </body>
