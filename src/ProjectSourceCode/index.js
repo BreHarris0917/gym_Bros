@@ -126,24 +126,28 @@ app.get('/fitness', (req, res) => {
   });
 });
 
-app.get('/workout', (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/login');
-  }
+// app.get('/workout', (req, res) => {
+//   if (!req.session.user) {
+//     return res.redirect('/login');
+//   }
 
+//   res.render('pages/workout')
+// });
+
+// app.get('/shop', (req, res) => {
+//   if (!req.session.user) {
+//     return res.redirect('/login');
+//   }
+
+//   res.render('pages/shop')
+// });
+
+app.get('/workout', (req, res) => {
   res.render('pages/workout')
 });
 
 app.get('/shop', (req, res) => {
-  if (!req.session.user) {
-    return res.redirect('/login');
-  }
-
   res.render('pages/shop')
-});
-
-app.get('/workout', (req, res) => {
-  res.render('pages/workout')
 });
 
 app.get('/cart', (req, res) => {
