@@ -78,7 +78,12 @@ SQL
 
 ## Instructions on how to run the app locally 
 
-*(To be filled out)*
+If running from source code
+
+- Have docker installed and open on device
+- Change directory to src>>ProjectSourceCode
+- docker compose up
+- localhost:3000/login on any browser
 
 ## Running Tests
 
