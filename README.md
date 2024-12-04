@@ -87,7 +87,7 @@ If running from source code
 
 ## Running Tests
 
-*(To be filled out)*
+- docker compose up in the terminal will run our 8 tests
 
 ## Contributors
 
