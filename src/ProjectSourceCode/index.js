@@ -85,6 +85,13 @@ db.connect()
 
 // -------------------------------------  ROUTES   ----------------------------------------------
 
+// Middleware to pass session user to all views
+app.use((req, res, next) => {
+  res.locals.user = req.session.user || null; // Pass user or null if not logged in
+  next();
+});
+
+
 const user = {
   username:undefined,
   password: undefined,
@@ -135,8 +142,10 @@ app.get('/home', async (req, res) => {
 
 
 app.get('/login', (req, res) => {
-  res.render('pages/login')
+  const message = req.query.message; 
+  res.render('pages/login', { message }); 
 });
+
 
 app.get('/register', (req, res) => {
   res.render('pages/register')
@@ -444,9 +453,15 @@ app.post('/submit-points', async (req, res) => {
 app.use(auth);
 
 app.get('/logout', (req, res) => {
-  req.session.destroy();
-  res.redirect('/');
+  req.session.destroy((err) => {
+    if (err) {
+      console.error('Error during logout:', err);
+      return res.redirect('/');
+    }
+    res.redirect('/login?message=Successfully logged out');
+  });
 });
+
 
 // Starting the server
 const PORT = process.env.PORT || 3000;
