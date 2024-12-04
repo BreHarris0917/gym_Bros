@@ -10,10 +10,8 @@ const bodyParser = require('body-parser');
 const session = require('express-session'); //to set the session object. To store or access session data, use the `req.session`, which is (generally) serialized as JSON by the store.
 const bcrypt = require('bcryptjs'); //to hash passwords
 const axios = require('axios'); //to make HTTP requests from our server. 
-const { error } = require('console');
 
 // App Settings
-
 // ------------------------------
 //create `ExpressHandlebars` instance and configure the layouts and partials dir.
 const hbs = handlebars.create({
@@ -38,30 +36,6 @@ app.use(
     resave: false, //no resaving session if not modified
   })
 );
-
-// Register a Handlebars helper to add 1 to the index
-hbs.handlebars.registerHelper('add', function(a, b) {
-  return a + b;
-});
-
-Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
-  switch (operator) {
-    case '==':
-      return v1 == v2 ? options.fn(this) : options.inverse(this);
-    case '===':
-      return v1 === v2 ? options.fn(this) : options.inverse(this);
-    case '<':
-      return v1 < v2 ? options.fn(this) : options.inverse(this);
-    case '>':
-      return v1 > v2 ? options.fn(this) : options.inverse(this);
-    case '<=':
-      return v1 <= v2 ? options.fn(this) : options.inverse(this);
-    case '>=':
-      return v1 >= v2 ? options.fn(this) : options.inverse(this);
-    default:
-      return options.inverse(this);
-  }
-});
 
 // -------------------------------------  DB CONFIG AND CONNECT   ---------------------------------------
 const dbConfig = {
