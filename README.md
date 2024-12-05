@@ -9,7 +9,7 @@
   - [In-App Store](#in-app-store)
   - [Profile and Registration Page](#profile--registration-page)
   - [Leaderboard](#leaderboard)
-  - [Daily Check-in](#daily-check--in)
+  - [Daily Check-in](#daily-check-in)
   - [Fitness Videos](#fitness-videos)
 - [Technology Stack](#technology-stack)
 - [Prerequisites](#prerequisites)
