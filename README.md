@@ -103,6 +103,8 @@ If running from source code
 
 ## Running Tests
 
+- git checkout Lab11Testing
+- cd ProjectRepository >> cd ProjectSourceCode
 - docker compose up in the terminal will run our 8 tests
 
 ## Contributors
