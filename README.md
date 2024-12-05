@@ -9,6 +9,8 @@
   - [In-App Store](#in-app-store)
   - [Profile and Registration Page](#profile--registration-page)
   - [Leaderboard](#leaderboard)
+  - [Daily Check-in](#daily-check--in)
+  - [Fitness Videos](#fitness-videos)
 - [Technology Stack](#technology-stack)
 - [Prerequisites](#prerequisites)
 - [Instructions on How to Run the App Locally](#instructions-on-how-to-run-the-app-locally)
@@ -60,6 +62,20 @@ This feature will allow users to friend other users that are also on the app.
 - Showcase users in the lead
 - Showcase users workout information
 - Showcase users brief profile information
+
+### Daily check-in
+This feature will allow users to get motivated with a leaderboard point each time they check in
+
+**Features**:
+- Prompt the user with a check in box
+- Gives the user a leaderboard point on each daily check in
+
+### Fitness Videos
+This feature will allow users to find ways to stay active with at home videos
+
+**Features**:
+- Showcase hyperlinks to youtube videos
+- provides a video description
 
 ---
 
