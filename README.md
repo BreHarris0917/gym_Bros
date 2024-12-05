@@ -1,6 +1,7 @@
 # Gym Bros (Fitness Tracker)
 
 > Group project for Software Development Methods CSCI 3308.
+> Presentation: https://docs.google.com/presentation/d/1ILGfX3jeKnacBFhP7L2vE9Z-8IyGKrzaDNYOVtzusZw/edit?usp=sharing
 
 ## Table of Contents
 
