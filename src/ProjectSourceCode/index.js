@@ -102,7 +102,8 @@ const user = {
   height_inch: undefined,
   weight: undefined,
   age: undefined,
-  fitness_points: undefined
+  fitness_points: undefined,
+  last_checkin: undefined
 };
 
 app.get('/', (req, res) => {
@@ -114,11 +115,29 @@ app.get('/home', async (req, res) => {
     return res.redirect('/login');
   }
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   try {
-    const user = await db.oneOrNone('SELECT fitness_points FROM users WHERE username = $1', [req.session.user.username]);
-    
+    const user = await db.oneOrNone('SELECT last_checkin, fitness_points FROM users WHERE username = $1', [req.session.user.username]);
+
+
     if (!user) {
       return res.redirect('/login');
+    }
+
+    if (user.last_checkin !== currentDate) {
+      // User has not checked in today, show the popup and update fitness points
+      req.session.showCheckInPopup = true;
+      
+      // Update fitness points and last check-in date
+      await db.none(
+        'UPDATE users SET fitness_points = fitness_points + 1, last_checkin = $1 WHERE username = $2',
+        [currentDate, user.username]
+      );
+    } 
+    else {
+      console.log('User has already checked in today. No update needed.');
+      req.session.showCheckInPopup = false;
     }
 
     res.render('pages/home', {
@@ -222,7 +241,7 @@ app.post('/register', async (req, res) => {
     height_inch,
   } = req.body;
 
-  const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9);';
+  const query = 'INSERT INTO users (username, password, firstName, lastName, email, age, weight, height_feet, height_inch, fitness_points ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);';
   
   try{
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -236,7 +255,8 @@ app.post('/register', async (req, res) => {
       age,
       weight,
       height_feet,
-      height_inch
+      height_inch,
+      1
     ]);
 
     req.session.user = {
@@ -247,7 +267,8 @@ app.post('/register', async (req, res) => {
       height_feet,
       height_inch,
       weight,
-      age
+      age,
+      fitness_points: 1
     };
 
 
@@ -287,26 +308,9 @@ app.post('/login', async (req, res) => {
       height_feet: Number(user.height_feet),
       height_inch: Number(user.height_inch),
       age: Number(user.age),
-      fitness_points: Number(user.fitness_points)
+      fitness_points: Number(user.fitness_points),
+      last_checkin: user.last_checkin
     };
-
-    // Check if the user has checked in today
-    const currentDate = new Date().toISOString().split('T')[0]; // Get current date in YYYY-MM-DD format
-
-    if (user.last_checkin !== currentDate) {
-      // User has not checked in today, show the popup and update fitness points
-      req.session.showCheckInPopup = true;
-      
-      // Update fitness points and last check-in date
-      await db.none(
-        'UPDATE users SET fitness_points = fitness_points + 1, last_checkin = $1 WHERE username = $2',
-        [currentDate, user.username]
-      );
-    } 
-    else {
-      // User has already checked in today, don't show the popup
-      req.session.showCheckInPopup = false;
-    }
 
     req.session.save((err) => {
       if (err) {
@@ -373,7 +377,7 @@ app.post('/home', async (req, res) => {
         weight: req.session.user.weight,
         age: req.session.user.age,
         fitness_points: req.session.user.fitness_points,
-        showCheckInPopup: req.session.showCheckInPopup,
+        // showCheckInPopup: req.session.showCheckInPopup,
         message: 'Incorrect old password.',
         error: true
       });
@@ -396,7 +400,7 @@ app.post('/home', async (req, res) => {
       weight: req.session.user.weight,
       age: req.session.user.age,
       fitness_points: req.session.user.fitness_points,
-      showCheckInPopup: req.session.showCheckInPopup,
+      // showCheckInPopup: req.session.showCheckInPopup,
       message: 'Password successfully changed!',
       error: false
     });
@@ -413,7 +417,7 @@ app.post('/home', async (req, res) => {
       weight: req.session.user.weight,
       age: req.session.user.age,
       fitness_points: req.session.user.fitness_points,
-      showCheckInPopup: req.session.showCheckInPopup,
+      // showCheckInPopup: false,
       message: 'An error occurred while changing the password.',
       error: true
     });
